@@ -1,0 +1,54 @@
+
+shoot_background.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+background
+  rotate: false
+  xy: 0, 75
+  size: 480, 852
+  orig: 480, 852
+  offset: 0, 0
+  index: -1
+shoot_copyright
+  rotate: false
+  xy: 480, 702
+  size: 441, 225
+  orig: 441, 225
+  offset: 0, 0
+  index: -1
+game_loading1
+  rotate: false
+  xy: 0, 37
+  size: 186, 38
+  orig: 186, 38
+  offset: 0, 0
+  index: -1
+game_loading3
+  rotate: false
+  xy: 480, 664
+  size: 186, 38
+  orig: 186, 38
+  offset: 0, 0
+  index: -1
+game_loading2
+  rotate: false
+  xy: 0, 0
+  size: 186, 37
+  orig: 186, 37
+  offset: 0, 0
+  index: -1
+btn_finish
+  rotate: false
+  xy: 186, 27
+  size: 150, 48
+  orig: 150, 48
+  offset: 0, 0
+  index: -1
+game_loading4
+  rotate: false
+  xy: 480, 636
+  size: 114, 28
+  orig: 114, 28
+  offset: 0, 0
+  index: -1

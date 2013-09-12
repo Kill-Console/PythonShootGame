@@ -1,0 +1,236 @@
+
+shoot.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+enemy3_down6
+  rotate: false
+  xy: 0, 747
+  size: 166, 261
+  orig: 166, 261
+  offset: 0, 0
+  index: -1
+enemy3_hit
+  rotate: false
+  xy: 166, 750
+  size: 169, 258
+  orig: 169, 258
+  offset: 0, 0
+  index: -1
+enemy3_n1
+  rotate: false
+  xy: 335, 750
+  size: 169, 258
+  orig: 169, 258
+  offset: 0, 0
+  index: -1
+enemy3_n2
+  rotate: false
+  xy: 504, 750
+  size: 169, 258
+  orig: 169, 258
+  offset: 0, 0
+  index: -1
+enemy3_down1
+  rotate: false
+  xy: 0, 486
+  size: 165, 261
+  orig: 165, 261
+  offset: 0, 0
+  index: -1
+enemy3_down2
+  rotate: false
+  xy: 0, 225
+  size: 165, 261
+  orig: 165, 261
+  offset: 0, 0
+  index: -1
+enemy3_down5
+  rotate: false
+  xy: 673, 748
+  size: 166, 260
+  orig: 166, 260
+  offset: 0, 0
+  index: -1
+enemy3_down3
+  rotate: false
+  xy: 839, 748
+  size: 165, 260
+  orig: 165, 260
+  offset: 0, 0
+  index: -1
+enemy3_down4
+  rotate: false
+  xy: 165, 486
+  size: 165, 261
+  orig: 165, 261
+  offset: 0, 0
+  index: -1
+hero1
+  rotate: false
+  xy: 0, 99
+  size: 102, 126
+  orig: 102, 126
+  offset: 0, 0
+  index: -1
+hero2
+  rotate: false
+  xy: 165, 360
+  size: 102, 126
+  orig: 102, 126
+  offset: 0, 0
+  index: -1
+hero_blowup_n1
+  rotate: false
+  xy: 165, 234
+  size: 102, 126
+  orig: 102, 126
+  offset: 0, 0
+  index: -1
+hero_blowup_n2
+  rotate: false
+  xy: 330, 624
+  size: 102, 126
+  orig: 102, 126
+  offset: 0, 0
+  index: -1
+hero_blowup_n3
+  rotate: false
+  xy: 330, 498
+  size: 102, 126
+  orig: 102, 126
+  offset: 0, 0
+  index: -1
+hero_blowup_n4
+  rotate: false
+  xy: 432, 624
+  size: 102, 126
+  orig: 102, 126
+  offset: 0, 0
+  index: -1
+enemy2
+  rotate: false
+  xy: 0, 0
+  size: 69, 99
+  orig: 69, 99
+  offset: 0, 0
+  index: -1
+enemy2_hit
+  rotate: false
+  xy: 432, 525
+  size: 69, 99
+  orig: 69, 99
+  offset: 0, 0
+  index: -1
+ufo2
+  rotate: false
+  xy: 102, 118
+  size: 60, 107
+  orig: 60, 107
+  offset: 0, 0
+  index: -1
+enemy2_down1
+  rotate: false
+  xy: 534, 655
+  size: 69, 95
+  orig: 69, 95
+  offset: 0, 0
+  index: -1
+enemy2_down2
+  rotate: false
+  xy: 603, 655
+  size: 69, 95
+  orig: 69, 95
+  offset: 0, 0
+  index: -1
+enemy2_down3
+  rotate: false
+  xy: 672, 653
+  size: 69, 95
+  orig: 69, 95
+  offset: 0, 0
+  index: -1
+enemy2_down4
+  rotate: false
+  xy: 741, 653
+  size: 69, 95
+  orig: 69, 95
+  offset: 0, 0
+  index: -1
+ufo1
+  rotate: false
+  xy: 267, 398
+  size: 58, 88
+  orig: 58, 88
+  offset: 0, 0
+  index: -1
+bomb
+  rotate: false
+  xy: 810, 691
+  size: 63, 57
+  orig: 63, 57
+  offset: 0, 0
+  index: -1
+enemy1_down1
+  rotate: false
+  xy: 267, 347
+  size: 57, 51
+  orig: 57, 51
+  offset: 0, 0
+  index: -1
+enemy1_down2
+  rotate: false
+  xy: 873, 697
+  size: 57, 51
+  orig: 57, 51
+  offset: 0, 0
+  index: -1
+enemy1_down3
+  rotate: false
+  xy: 267, 296
+  size: 57, 51
+  orig: 57, 51
+  offset: 0, 0
+  index: -1
+enemy1_down4
+  rotate: false
+  xy: 930, 697
+  size: 57, 51
+  orig: 57, 51
+  offset: 0, 0
+  index: -1
+game_pause_nor
+  rotate: false
+  xy: 267, 251
+  size: 60, 45
+  orig: 60, 45
+  offset: 0, 0
+  index: -1
+game_pause_pressed
+  rotate: false
+  xy: 810, 646
+  size: 60, 45
+  orig: 60, 45
+  offset: 0, 0
+  index: -1
+enemy1
+  rotate: false
+  xy: 534, 612
+  size: 57, 43
+  orig: 57, 43
+  offset: 0, 0
+  index: -1
+bullet1
+  rotate: false
+  xy: 1004, 987
+  size: 9, 21
+  orig: 9, 21
+  offset: 0, 0
+  index: -1
+bullet2
+  rotate: false
+  xy: 69, 78
+  size: 9, 21
+  orig: 9, 21
+  offset: 0, 0
+  index: -1
