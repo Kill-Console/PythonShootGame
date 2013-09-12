@@ -1,0 +1,17 @@
+info face="Deeko Comic Regular" size=40 bold=0 italic=0 charset="" unicode=0 stretchH=100 smooth=1 aa=1 padding=0,0,0,0 spacing=0,0
+common lineHeight=26 base=27 scaleW=512 scaleH=512 pages=1 packed=0
+page id=0 file="font.png"
+chars count=11
+char id=32   x=0     y=0     width=0     height=0     xoffset=0     yoffset=27    xadvance=12     page=0  chnl=0 
+char id=52   x=0     y=0     width=30     height=40     xoffset=1     yoffset=-7    xadvance=30     page=0  chnl=0 
+char id=51   x=30     y=0     width=27     height=38     xoffset=1     yoffset=-5    xadvance=27     page=0  chnl=0 
+char id=88   x=57     y=0     width=30     height=34     xoffset=1     yoffset=-5    xadvance=30     page=0  chnl=0 
+char id=56   x=87     y=0     width=33     height=34     xoffset=1     yoffset=-7    xadvance=34     page=0  chnl=0 
+char id=57   x=120     y=0     width=30     height=33     xoffset=1     yoffset=-4    xadvance=30     page=0  chnl=0 
+char id=50   x=150     y=0     width=29     height=33     xoffset=1     yoffset=-3    xadvance=30     page=0  chnl=0 
+char id=48   x=179     y=0     width=27     height=31     xoffset=1     yoffset=-3    xadvance=28     page=0  chnl=0 
+char id=54   x=206     y=0     width=31     height=31     xoffset=1     yoffset=0    xadvance=32     page=0  chnl=0 
+char id=53   x=237     y=0     width=35     height=31     xoffset=1     yoffset=0    xadvance=36     page=0  chnl=0 
+char id=49   x=272     y=0     width=6     height=31     xoffset=1     yoffset=-5    xadvance=7     page=0  chnl=0 
+char id=55   x=278     y=0     width=33     height=30     xoffset=1     yoffset=-1    xadvance=34     page=0  chnl=0 
+kernings count=-1
