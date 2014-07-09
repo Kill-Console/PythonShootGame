@@ -166,7 +166,7 @@ while running:
         if event.type == pygame.QUIT:
             pygame.quit()
             exit()
-            
+
     # 监听键盘事件
     key_pressed = pygame.key.get_pressed()
     # 若玩家被击中，则无效
@@ -179,6 +179,13 @@ while running:
             player.moveLeft()
         if key_pressed[K_d] or key_pressed[K_RIGHT]:
             player.moveRight()
+        if key_pressed[K_ESCAPE]:
+            while 1:
+                pygame.time.delay(10)
+                event = pygame.event.poll()
+                if event.type == pygame.KEYDOWN:
+                    break
+
 
 
 font = pygame.font.Font(None, 48)
