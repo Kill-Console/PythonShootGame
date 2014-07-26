@@ -75,6 +75,8 @@ clock = pygame.time.Clock()
 
 running = True
 
+pause = False
+
 while running:
     # 控制游戏最大帧率为60
     clock.tick(60)
@@ -166,6 +168,16 @@ while running:
         if event.type == pygame.QUIT:
             pygame.quit()
             exit()
+        if event.type == pygame.KEYDOWN:
+        	if event.key == pygame.K_ESCAPE:
+        		pause = True
+    
+    while pause == True:
+    	
+    	for event in pygame.event.get():
+    		if event.type == pygame.KEYDOWN:
+    			if event.key == pygame.K_ESCAPE:
+    				pause = False
             
     # 监听键盘事件
     key_pressed = pygame.key.get_pressed()
@@ -188,10 +200,3 @@ text_rect.centerx = screen.get_rect().centerx
 text_rect.centery = screen.get_rect().centery + 24
 screen.blit(game_over, (0, 0))
 screen.blit(text, text_rect)
-
-while 1:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            exit()
-    pygame.display.update()
