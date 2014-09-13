@@ -79,5 +79,13 @@ class Enemy(pygame.sprite.Sprite):
        self.speed = 2
        self.down_index = 0
 
+    def swerve(self):
+        if self.rect.left >= SCREEN_WIDTH - self.rect.width:
+            self.rect.left = SCREEN_WIDTH - self.rect.width
+        if self.rest.left <= 0:
+            self.rect.left = 0
+        else:
+            
+
     def move(self):
         self.rect.top += self.speed
