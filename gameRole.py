@@ -81,16 +81,23 @@ class Enemy(pygame.sprite.Sprite):
        self.down_index = 0
 
     def swerve(self):
-            if self.rect.left >= SCREEN_WIDTH - self.rect.width:
+        LorR = random.randint(0,1)
+        if self.rect.left >= SCREEN_WIDTH - self.rect.width:
+            if LorR == 0:
+                self.rect.left += self.speed*2
+            else:
                 self.rect.left = SCREEN_WIDTH - self.rect.width
-            if self.rect.left <= 0:
+        if self.rect.left <= 0:
+            if LorR == 0:
                 self.rect.left = 0
             else:
-                 LorR = random.randint(0,1)
-                 if LorR == 0:
-                      self.rect.left += self.speed
-                 else:
-                      self.rect.right += self.speed
+                self.rect.left -= self.speed*2
+        else:
+             LorR = random.randint(0,1)
+             if LorR == 0:
+                  self.rect.left += self.speed*2
+             else:
+                  self.rect.left -= self.speed*2
 
     def move(self):
         self.rect.top += self.speed
