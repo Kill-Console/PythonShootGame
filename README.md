@@ -15,5 +15,5 @@ This project only include two simple .py files:
   
 # Installation
   
-To run this game, install the corresponding version of pygame.
+To run this game, install the corresponding version of Pygame.
 After that, double click the mainGame.py and you can play it.
