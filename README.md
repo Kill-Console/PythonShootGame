@@ -1,15 +1,27 @@
-PythonShootGame
-===============
+# PythonShootGame
 
-A simple shoot game by python
+A simple shoot game written in Python.
 
+# Introduce
 
 This project only include two simple .py files: 
 
-  mainGame.py：the initialization and main loop of the game
+1. mainGame.py：The initialization and main loop of the game.
+2. gameRole.py: Class of the game role.
+
+# Requirement
+
+1. Python 2.7
+2. Python-Pygame
   
-  gameRole.py: class of the game role
+# How To Start Game
   
-  
-To run this game, first install python 2.7, then install the corresponding version of pygame.
-After that, double click the mainGame.py, you can play it.
+```bash
+$ python mainGame.py
+```
+
+#Screeshot
+
+![](http://s2.postimg.org/728c1wy4p/Screenshot_5.png)
+
+![](http://s30.postimg.org/fflxcv9ld/Screenshot_6.png)
