@@ -20,6 +20,9 @@ This project only include two simple .py files:
 $ python mainGame.py
 ```
 
+# License
+GPL
+
 #Screeshot
 
 ![](http://s2.postimg.org/728c1wy4p/Screenshot_5.png)
