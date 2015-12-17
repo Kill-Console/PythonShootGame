@@ -9,6 +9,7 @@ import pygame
 from sys import exit
 from pygame.locals import *
 from gameRole import *
+import time
 import random
 
 
@@ -74,20 +75,11 @@ score = 0
 clock = pygame.time.Clock()
 
 running = True
-
+bullet_cooldown = 0
 while running:
     # 控制游戏最大帧率为60
+
     clock.tick(60)
-
-    # 控制发射子弹频率,并发射子弹
-    if not player.is_hit:
-        if shoot_frequency % 15 == 0:
-            bullet_sound.play()
-            player.shoot(bullet_img)
-        shoot_frequency += 1
-        if shoot_frequency >= 15:
-            shoot_frequency = 0
-
     # 生成敌机
     if enemy_frequency % 50 == 0:
         enemy1_pos = [random.randint(0, SCREEN_WIDTH - enemy1_rect.width), 0]
@@ -166,7 +158,7 @@ while running:
         if event.type == pygame.QUIT:
             pygame.quit()
             exit()
-            
+
     # 监听键盘事件
     key_pressed = pygame.key.get_pressed()
     # 若玩家被击中，则无效
@@ -179,7 +171,11 @@ while running:
             player.moveLeft()
         if key_pressed[K_d] or key_pressed[K_RIGHT]:
             player.moveRight()
+        if key_pressed[K_e] or key_pressed[K_SPACE] and bullet_cooldown <= 0:
+            player.shoot(bullet_img)
+            bullet_cooldown = 30
 
+    bullet_cooldown -= 1
 
 font = pygame.font.Font(None, 48)
 text = font.render('Score: '+ str(score), True, (255, 0, 0))

@@ -6,6 +6,7 @@ Created on Wed Sep 11 16:36:03 2013
 """
 
 import pygame
+import random
 
 SCREEN_WIDTH = 480
 SCREEN_HEIGHT = 800
@@ -79,5 +80,25 @@ class Enemy(pygame.sprite.Sprite):
        self.speed = 2
        self.down_index = 0
 
+    def swerve(self):
+        LorR = random.randint(0,1)
+        ratio = .01
+        if self.rect.left >= SCREEN_WIDTH - self.rect.width:
+            if LorR == 0:
+                self.rect.left += self.speed*ratio
+            else:
+                self.rect.left = SCREEN_WIDTH - self.rect.width
+        if self.rect.left <= 0:
+            if LorR == 0:
+                self.rect.left = 0
+            else:
+                self.rect.left -= self.speed*ratio
+        else:
+             if LorR == 0:
+                  self.rect.left += self.speed*ratio
+             else:
+                  self.rect.left -= self.speed*ratio
+
     def move(self):
         self.rect.top += self.speed
+        self.swerve()
