@@ -113,7 +113,7 @@ while running:
             player.is_hit = True
             game_over_sound.play()
             break
-        if enemy.rect.top < 0:
+        if enemy.rect.top > SCREEN_HEIGHT:
             enemies1.remove(enemy)
 
     # 将被击中的敌机对象添加到击毁敌机Group中，用来渲染击毁动画
