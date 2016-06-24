@@ -129,9 +129,9 @@ while running:
     if not player.is_hit:
         screen.blit(player.image[player.img_index], player.rect)
         # 更换图片索引使飞机有动画效果
-        player.img_index = shoot_frequency / 8
+        player.img_index = shoot_frequency // 8
     else:
-        player.img_index = player_down_index / 8
+        player.img_index = player_down_index // 8
         screen.blit(player.image[player.img_index], player.rect)
         player_down_index += 1
         if player_down_index > 47:
@@ -145,7 +145,7 @@ while running:
             enemies_down.remove(enemy_down)
             score += 1000
             continue
-        screen.blit(enemy_down.down_imgs[enemy_down.down_index / 2], enemy_down.rect)
+        screen.blit(enemy_down.down_imgs[enemy_down.down_index // 2], enemy_down.rect)
         enemy_down.down_index += 1
 
     # 绘制子弹和敌机
