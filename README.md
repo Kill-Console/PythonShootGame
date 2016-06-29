@@ -6,7 +6,7 @@ A simple shoot game written in Python.
 
 This project only include two simple .py files: 
 
-1. mainGame.py：The initialization and main loop of the game.
+1. mainGame.py: The initialization and main loop of the game.
 2. gameRole.py: Class of the game role.
 
 # Requirement
