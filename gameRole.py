@@ -76,7 +76,7 @@ class Enemy(pygame.sprite.Sprite):
        self.rect = self.image.get_rect()
        self.rect.topleft = init_pos
        self.down_imgs = enemy_down_imgs
-       self.speed = 2
+       self.speed = 5
        self.down_index = 0
 
     def move(self):
