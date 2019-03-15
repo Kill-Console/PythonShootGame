@@ -23,7 +23,7 @@ $ python mainGame.py
 # License
 GPL
 
-#Screeshot
+# Screeshot
 
 ![](http://s2.postimg.org/728c1wy4p/Screenshot_5.png)
 
