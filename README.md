@@ -28,3 +28,6 @@ GPL
 ![](http://s2.postimg.org/728c1wy4p/Screenshot_5.png)
 
 ![](http://s30.postimg.org/fflxcv9ld/Screenshot_6.png)
+
+# Doc
+[使用Pygame制作微信打飞机游戏PC版](https://www.cnblogs.com/dukeleo/p/3339780.html) (a Chinese startup)
