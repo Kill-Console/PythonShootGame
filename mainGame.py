@@ -15,7 +15,8 @@ import random
 # 初始化游戏
 pygame.init()
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-pygame.display.set_caption('飞机大战')
+# pygame.display.set_caption('飞机大战')
+pygame.display.set_caption('Chinese Python Shooter Game')
 
 # 载入游戏音乐
 bullet_sound = pygame.mixer.Sound('resources/sound/bullet.wav')
@@ -65,6 +66,9 @@ enemies1 = pygame.sprite.Group()
 enemies_down = pygame.sprite.Group()
 
 shoot_frequency = 0
+
+shoot_timing = 15
+
 enemy_frequency = 0
 
 player_down_index = 16
@@ -77,24 +81,26 @@ running = True
 
 while running:
     # 控制游戏最大帧率为60
+    # Translation? Clock.tick is just for processing efficiency?
     clock.tick(60)
 
     # 控制发射子弹频率,并发射子弹
+    # Translation? for calculating when and how fast player shoots
     if not player.is_hit:
-        if shoot_frequency % 15 == 0:
+        if shoot_frequency % shoot_timing == 0:
             bullet_sound.play()
             player.shoot(bullet_img)
         shoot_frequency += 1
-        if shoot_frequency >= 15:
+        if shoot_frequency >= shoot_timing:
             shoot_frequency = 0
 
     # 生成敌机
-    if enemy_frequency % 50 == 0:
+    if enemy_frequency % 40 == 0:
         enemy1_pos = [random.randint(0, SCREEN_WIDTH - enemy1_rect.width), 0]
         enemy1 = Enemy(enemy1_img, enemy1_down_imgs, enemy1_pos)
         enemies1.add(enemy1)
     enemy_frequency += 1
-    if enemy_frequency >= 100:
+    if enemy_frequency >= 80:
         enemy_frequency = 0
 
     # 移动子弹，若超出窗口范围则删除
@@ -180,7 +186,7 @@ while running:
         if key_pressed[K_d] or key_pressed[K_RIGHT]:
             player.moveRight()
 
-
+# calculate
 font = pygame.font.Font(None, 48)
 text = font.render('Score: '+ str(score), True, (255, 0, 0))
 text_rect = text.get_rect()
