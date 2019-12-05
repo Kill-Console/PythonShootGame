@@ -39,6 +39,7 @@ class Player(pygame.sprite.Sprite):
         self.bullets = pygame.sprite.Group()            # 玩家飞机所发射的子弹的集合
         self.img_index = 0                              # 玩家精灵图片索引
         self.is_hit = False                             # 玩家是否被击中
+        self.level = 1
 
     def shoot(self, bullet_img):
         bullet = Bullet(bullet_img, self.rect.midtop)
