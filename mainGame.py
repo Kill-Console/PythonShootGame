@@ -50,6 +50,7 @@ player = Player(plane_img, player_rect, player_pos)
 bullet_rect = pygame.Rect(1004, 987, 9, 21)
 bullet_img = plane_img.subsurface(bullet_rect)
 
+
 # 적을 정의하는 데 사용하는 파라미터
 enemy1_rect = pygame.Rect(534, 612, 57, 43)
 enemy1_img = plane_img.subsurface(enemy1_rect)
