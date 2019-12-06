@@ -6,6 +6,7 @@ Created on Wed Sep 11 16:36:03 2013
 """
 
 import pygame
+import random
 
 SCREEN_WIDTH = 480
 SCREEN_HEIGHT = 800
@@ -79,6 +80,17 @@ class Enemy(pygame.sprite.Sprite):
        self.down_imgs = enemy_down_imgs
        self.speed = 2
        self.down_index = 0
+
+    def move(self):
+        self.rect.top += self.speed
+
+
+class meteor(pygame.sprite.Sprite):
+    def __init__(self,meteor_img, init_pos):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = meteor_img
+        self.rect = self.image.get.rect()
+        self.speed = random.randint(1,6)
 
     def move(self):
         self.rect.top += self.speed
