@@ -118,8 +118,16 @@ while running:
 
     # 将被击中的敌机对象添加到击毁敌机Group中，用来渲染击毁动画
     enemies1_down = pygame.sprite.groupcollide(enemies1, player.bullets, 1, 1)
+
     for enemy_down in enemies1_down:
         enemies_down.add(enemy_down)
+
+        #적이 죽을 때 경험치 1 획득, 10명 죽이면 레벨, 이속 +1
+        player.kill+=1
+        if player.kill>=10:
+            player.level += 1
+            player.kill -= 10
+            player.speed += 1 
 
     # 배경 그리기(실제)
     screen.fill(0)
@@ -138,7 +146,7 @@ while running:
             running = False
 
     # 绘制击毁动画
-    for enemy_down in enemies_down:
+    for enemy_down in enemies_down:     
         if enemy_down.down_index == 0:
             enemy1_down_sound.play()
         if enemy_down.down_index > 7:
