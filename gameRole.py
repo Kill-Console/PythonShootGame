@@ -85,6 +85,18 @@ class Enemy(pygame.sprite.Sprite):
     def move(self):
         self.rect.top += self.speed
 
+
+class bBullet(pygame.sprite.Sprite):
+    def __init__(self, bullet_img, init_pos):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = bullet_img
+        self.rect = self.image.get_rect()
+        self.rect.midbottom = init_pos
+        self.speed = 5
+
+    def move(self):
+        self.rect.top += self.speed
+
 class Boss(pygame.sprite.Sprite):
     def __init(self,boss_img,boss_down_imgs, init_pos):
         pygame.sprite.sprite.__init(self)
@@ -99,4 +111,7 @@ class Boss(pygame.sprite.Sprite):
     def move(self):
         self.rect.top += self.speed
     def teleport(self):
-        self.rect.left = random.randint(0,SCREEN_WIDTH-self.rect.width)    
+        self.rect.left = random.randint(0,SCREEN_WIDTH-self.rect.width)
+    def shoot(self, bullet_img):
+        bullet = bBullet(bullet_img, self.rect.midtop)
+        self.bullets.add(bullet)
