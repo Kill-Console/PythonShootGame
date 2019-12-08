@@ -84,3 +84,19 @@ class Enemy(pygame.sprite.Sprite):
 
     def move(self):
         self.rect.top += self.speed
+
+class Boss(pygame.sprite.Sprite):
+    def __init(self,boss_img,boss_down_imgs, init_pos):
+        pygame.sprite.sprite.__init(self)
+        self.image = boss_img
+        self.rect = self.image.get.rect()
+        self.rect.topleft = init_pos
+        self.down_imgs = boss_down_imgs
+        self.speed = 0.2
+        self.down_index = 0
+        self.bullets = pygame.sprite.Group()
+        self.hp = 20
+    def move(self):
+        self.rect.top += self.speed
+    def teleport(self):
+        self.rect.left = random.randint(0,SCREEN_WIDTH-self.rect.width)    
