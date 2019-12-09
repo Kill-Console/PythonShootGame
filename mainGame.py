@@ -12,6 +12,10 @@ from gameRole import *
 import random
 
 
+def drawObject(obj,x,y):
+    global screen
+    screen.blit(obj,(x,y))
+
 # 게임 초기화
 pygame.init()
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -115,7 +119,31 @@ while running:
             break
         if enemy.rect.top > SCREEN_HEIGHT:
             enemies1.remove(enemy)
+            
+    #운석 떨구기
+    rock = pygame.image.load('resources/image/rock15.png')
+    rockSize = rock.get_rect().size
+    rockWidth = rockSize[0]
+    rockHeight = rockSize[1]
 
+    rockX=random.randrange(0,SCREEN_WIDTH-rockWidth)
+    rockY = 0
+    rockSpeed = random.randint(5,10)
+    rockY+=rockSpeed
+
+    if rockY > SCREEN_HEIGHT:
+        rock = pygame.image.load('resources/image/rock15.png')
+        rockSize = rock.get_rect().size
+        rockWidth = rockSize[0]
+        rockHeight = rockSize[1]
+
+        rockX=random.randrange(0,SCREEN_WIDTH-rockWidth)
+        rockY = 0
+        rockSpeed = random.randint(5,10)
+        rockY+=round
+        
+    screen.blit(rock,(rockX,rockY))
+    
     # 将被击中的敌机对象添加到击毁敌机Group中，用来渲染击毁动画
     enemies1_down = pygame.sprite.groupcollide(enemies1, player.bullets, 1, 1)
 
@@ -124,9 +152,9 @@ while running:
 
         #적이 죽을 때 경험치 1 획득, 10명 죽이면 레벨, 이속 +1
         player.kill+=1
-        if player.kill>=10:
+        if player.kill>=2**player.level:
+            player.kill -= 2**player.level
             player.level += 1
-            player.kill -= 10
             player.speed += 1 
 
     # 배경 그리기(실제)
