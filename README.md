@@ -1,7 +1,7 @@
 # PythonShootGame
 
 A simple shoot game written in Python.
-
+[![Run on Repl.it](https://repl.it/badge/github/Kill-Console/PythonShootGame)](https://repl.it/github/Kill-Console/PythonShootGame)
 # Introduce
 
 This project only include two simple .py files: 
