@@ -79,6 +79,8 @@ clock = pygame.time.Clock()
 
 running = True
 
+rockY=1000
+
 while running:
     # 최대 프레임 설정
     clock.tick(60)
@@ -121,26 +123,17 @@ while running:
             enemies1.remove(enemy)
             
     #운석 떨구기
-    rock = pygame.image.load('resources/image/rock15.png')
-    rockSize = rock.get_rect().size
-    rockWidth = rockSize[0]
-    rockHeight = rockSize[1]
-
-    rockX=random.randrange(0,SCREEN_WIDTH-rockWidth)
-    rockY = 0
-    rockSpeed = random.randint(5,10)
-    rockY+=rockSpeed
 
     if rockY > SCREEN_HEIGHT:
         rock = pygame.image.load('resources/image/rock15.png')
         rockSize = rock.get_rect().size
-        rockWidth = rockSize[0]
-        rockHeight = rockSize[1]
+        rockWidth = 75
+        rockHeight = 68
 
         rockX=random.randrange(0,SCREEN_WIDTH-rockWidth)
         rockY = 0
         rockSpeed = random.randint(5,10)
-        rockY+=round
+        rockY+=rockSpeed
         
     screen.blit(rock,(rockX,rockY))
     

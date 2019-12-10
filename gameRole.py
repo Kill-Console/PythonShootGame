@@ -99,7 +99,7 @@ class bBullet(pygame.sprite.Sprite):
 
 class Boss(pygame.sprite.Sprite):
     def __init(self,boss_img,boss_down_imgs, init_pos):
-        pygame.sprite.sprite.__init(self)
+        pygame.sprite.Sprite.__init(self)
         self.image = boss_img
         self.rect = self.image.get.rect()
         self.rect.topleft = init_pos
@@ -115,3 +115,4 @@ class Boss(pygame.sprite.Sprite):
     def shoot(self, bullet_img):
         bullet = bBullet(bullet_img, self.rect.midtop)
         self.bullets.add(bullet)
+
