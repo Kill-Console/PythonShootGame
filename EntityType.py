@@ -5,16 +5,19 @@ Created on Wed Sep 11 16:36:03 2013
 @author: Leo
 """
 
+
+import yaml
 import pygame
 
-SCREEN_WIDTH = 480
-SCREEN_HEIGHT = 800
+conf = yaml.load(open("./setting.yaml", "r"))
+SCREEN_WIDTH = conf['display']['W']
+SCREEN_HEIGHT = conf['display']['H']
 
 TYPE_SMALL = 1
 TYPE_MIDDLE = 2
 TYPE_BIG = 3
 
-# 子弹类
+
 class Bullet(pygame.sprite.Sprite):
     def __init__(self, bullet_img, init_pos):
         pygame.sprite.Sprite.__init__(self)
@@ -26,7 +29,8 @@ class Bullet(pygame.sprite.Sprite):
     def move(self):
         self.rect.top -= self.speed
 
-# 玩家类
+
+
 class Player(pygame.sprite.Sprite):
     def __init__(self, plane_img, player_rect, init_pos):
         pygame.sprite.Sprite.__init__(self)
@@ -41,7 +45,9 @@ class Player(pygame.sprite.Sprite):
         self.img_index = 0                              # 玩家精灵图片索引
         self.is_hit = False                             # 玩家是否被击中
         self.hp = 3                                     # HP 변수 추가
-        self.kill = 0                                   # 죽인 적 수
+        self.killed = 0                                 # 죽인 적 수
+        self.alive = True
+        self.player_down_index = 16
 
     def shoot(self, bullet_img):
         bullet = Bullet(bullet_img, self.rect.midtop)
@@ -71,16 +77,36 @@ class Player(pygame.sprite.Sprite):
         else:
             self.rect.left += self.speed
 
-# 敌人类
+    def draw(self, screen, shoot_frequency):
+        if not self.is_hit:
+            screen.blit(self.image[self.img_index], self.rect)
+            self.img_index = shoot_frequency // 8
+        else:
+            self.img_index = self.player_down_index // 8
+            screen.blit(self.image[self.img_index], self.rect)
+            self.player_down_index += 1
+            if self.player_down_index > 47:
+                self.alive = False
+        self.bullets.draw(screen)
+
+
 class Enemy(pygame.sprite.Sprite):
-    def __init__(self, enemy_img, enemy_down_imgs, init_pos):
+    '''
+        좌표는 좌측 상단 기준
+    '''
+    def __init__(self, enemy_img, enemy_down_imgs, init_pos, E_HP):
        pygame.sprite.Sprite.__init__(self)
-       self.image = enemy_img
+       self.image = enemy_img                                   # Default image
        self.rect = self.image.get_rect()
        self.rect.topleft = init_pos
-       self.down_imgs = enemy_down_imgs
-       self.speed = 2
-       self.down_index = 0
+       self.down_imgs = enemy_down_imgs                         # Down 시 image
+       self.speed = 2                                           # 이동 속도
+       self.HP = E_HP                                           # HP --> 총알을 맞고 버틸 수 있는 횟수
+       self.down_index = 0                                      # 죽은 후 몇 fps간 유지
 
     def move(self):
         self.rect.top += self.speed
+
+    def down_draw(self, screen):
+        screen.blit(self.down_imgs[self.down_index // 2], self.rect)
+>>>>>>> yeon:EntityType.py
