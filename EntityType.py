@@ -109,4 +109,3 @@ class Enemy(pygame.sprite.Sprite):
 
     def down_draw(self, screen):
         screen.blit(self.down_imgs[self.down_index // 2], self.rect)
->>>>>>> yeon:EntityType.py
