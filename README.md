@@ -4,10 +4,16 @@ A simple shoot game written in Python.
 
 # Introduce
 
-This project only include two simple .py files: 
+This project only include three simple .py files: 
 
-1. mainGame.py: The initialization and main loop of the game.
-2. gameRole.py: Class of the game role.
+1. Play.py: The initialization and main loop of the game.
+2. Game.py: Class of the overall game
+3. EntityType.py: Classes for game (Player / Bullet / Enemy) 
+
+# Rule
++ 적이 한 번 죽을 때 마다 경험치 1
++ 적을 10번 죽이면 이동 속도 증가 / Level 증가
++ 
 
 # Requirement
 
@@ -17,17 +23,11 @@ This project only include two simple .py files:
 # How To Start Game
   
 ```bash
-$ python mainGame.py
+$ python Play.py
 ```
-
 # License
 GPL
 
-# Screeshot
-
-![](http://s2.postimg.org/728c1wy4p/Screenshot_5.png)
-
-![](http://s30.postimg.org/fflxcv9ld/Screenshot_6.png)
 
 # Doc
 [使用Pygame制作微信打飞机游戏PC版](https://www.cnblogs.com/dukeleo/p/3339780.html) (a Chinese startup)
