@@ -48,7 +48,8 @@ class Game():
         self.player_img = pygame.image.load(imgs['player'])
         bullet_rect = pygame.Rect(1004, 987, 9, 21)
         self.bullet_img = self.player_img.subsurface(bullet_rect)
-    
+        bbullet_rect = pygame.Rect(69,78,9,21)
+        self.bbullet_img = self.player_img.subsurface(bbullet_rect)
 
     # Player 정보 setting 및 객체 생성
     def setPlayer(self):
@@ -73,6 +74,14 @@ class Game():
         self.enemy_down_imgs.append(self.player_img.subsurface(pygame.Rect(267, 296, 57, 43)))
         self.enemy_down_imgs.append(self.player_img.subsurface(pygame.Rect(930, 697, 57, 43)))
 
+##### Boss 정보 setting
+    def setBoss(self):
+        self.boss_rect = pygame.Rect(162,750,169,247)
+        self.boss_img = self.player_img.subsurface(self.boss_rect)
+        self.boss_down_imgs = []
+        self.boss_down_imgs.append(self.player_img.subsurface(pygame.Rect(0,480,169,247)))
+        self.boss_down_imgs.append(self.player_img.subsurface(pygame.Rect(0,230,169,247)))
+        self.boss_down_imgs.append(self.player_img.subsurface(pygame.Rect(840,750,169,247)))    
 
     def update(self):
         '''
@@ -134,9 +143,9 @@ class Game():
             enemy_down.down_index += 1
         
         # Player 레벨 조절
-        if self.player.killed>=2**player.level:
+        if self.player.killed>=2**self.player.level:
             self.player.level += 1
-            self.player.killed -= 2**player.level
+            self.player.killed -= 2**self.player.level
             self.player.speed += 1 
 
 

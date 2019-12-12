@@ -107,16 +107,16 @@ class Enemy(pygame.sprite.Sprite):
     def down_draw(self, screen):
         screen.blit(self.down_imgs[self.down_index // 2], self.rect)
 
-class Plane(pygame.sprite.Sprite):
-    def __init__(self, plane_img, init_pos):
+class bBullet(pygame.sprite.Sprite):
+    def __init__(self, bbullet_img,bbullet_speed, init_pos):
         pygame.sprite.Sprite.__init__(self)
-        self.image = plane_img
+        self.image = bbullet_img
         self.rect = self.image.get_rect()
         self.rect.midbottom = init_pos
-        self.speed = 10
-        
+        self.speed = bbullet_speed
+
     def move(self):
-        self.rect.top -= self.speed
+        self.rect.top += self.speed
 
 class Boss(pygame.sprite.Sprite):
 
