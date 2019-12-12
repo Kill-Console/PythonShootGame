@@ -19,19 +19,19 @@ class Game():
         self.setEnemy()
 
         self.score = 0
-        self.EHP = 2                                         # 새로 생긴 적의 HP --> 난이도 조절 parameter
+        self.EHP = 2                                         # 새로 생긴 적의 HP --> 난이도 조절 parameter (New enemy's HP-> difficulty control parameter)
         self.shoot_frequency = 0
         self.enemy_frequency = 0
 
 
-    # BGM 및 효과음 로딩 & 재생
+    # BGM 및 효과음 로딩 & 재생(BGM & Sound Effects Loading & Playback)
     def load_music(self): 
         sounds = self.conf['sounds']
         self.bullet_sound = pygame.mixer.Sound(sounds['bullet'])
         self.enemy_down_sound = pygame.mixer.Sound(sounds['E_down'])
         self.game_over_sound = pygame.mixer.Sound(sounds['gameover'])
         
-        self.bullet_sound.set_volume(0.3)                       # volume : 0 ~ 1 사이의 값 
+        self.bullet_sound.set_volume(0.3)                       # volume : 0 ~ 1 사이의 값(volume: a value between 0 and 1) 
         self.enemy_down_sound.set_volume(0.3)
         self.game_over_sound.set_volume(0.3)
         
@@ -40,7 +40,7 @@ class Game():
         pygame.mixer.music.set_volume(0.25)
 
 
-    # 게임에 필요한 이미지 로딩
+    # 게임에 필요한 이미지 로딩(Image loading for game)
     def load_image(self):
         imgs = self.conf['images']              
         self.background_img = pygame.image.load(imgs['background']).convert()
@@ -50,7 +50,7 @@ class Game():
         self.bullet_img = self.player_img.subsurface(bullet_rect)
     
 
-    # Player 정보 setting 및 객체 생성
+    # Player 정보 setting 및 객체 생성 (Player information setting and object creation)
     def setPlayer(self):
         player_rect = []
         player_rect.append(pygame.Rect(0, 99, 102, 126))        # default
