@@ -121,7 +121,7 @@ class Game():
         for enemy_down in cur_enemies_down:
             self.enemies_down.add(enemy_down)
 
-        #적이 죽을 때 경험치 1 획득, 10명 죽이면 레벨, 이속 +1
+        #적이 죽을 때 경험치 1 획득, 2^(플레이어 레벨)이 레벨업 조건(현재 상한 없음)
         for enemy_down in self.enemies_down: 
             enemy_down.HP -= 1
             if enemy_down.HP == 0:
@@ -133,9 +133,10 @@ class Game():
                 continue
             enemy_down.down_index += 1
         
-        if self.player.killed>=2**self.player.level:
+        # Player 레벨 조절
+        if self.player.killed>=2**player.level:
             self.player.level += 1
-            self.player.killed -= 2**self.player.level
+            self.player.killed -= 2**player.level
             self.player.speed += 1 
 
 

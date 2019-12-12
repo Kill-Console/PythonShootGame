@@ -107,6 +107,17 @@ class Enemy(pygame.sprite.Sprite):
     def down_draw(self, screen):
         screen.blit(self.down_imgs[self.down_index // 2], self.rect)
 
+class Plane(pygame.sprite.Sprite):
+    def __init__(self, plane_img, init_pos):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = plane_img
+        self.rect = self.image.get_rect()
+        self.rect.midbottom = init_pos
+        self.speed = 10
+        
+    def move(self):
+        self.rect.top -= self.speed
+
 class Boss(pygame.sprite.Sprite):
 
     def __init__(self, boss_img, boss_down_img, init_pos, boss_level):
@@ -117,3 +128,11 @@ class Boss(pygame.sprite.Sprite):
         self. down_imgs = boss_down_img
         self.HP = boss_level*20
         self.level = boss_level
+        
+    def make(self):
+        bullet = Bullet(bullet_img, self.rect.midtop)
+        self.bullets.add(bullet)
+
+    def teleport(self):
+        self.rect.top = randint(0,200)
+        self.rect.left = randint(0, SCREEN_WIDTH-self.image.width)
