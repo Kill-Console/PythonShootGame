@@ -5,7 +5,6 @@ Created on Wed Sep 11 16:36:03 2013
 @author: Leo
 """
 
-
 import yaml
 import pygame
 
@@ -16,7 +15,6 @@ SCREEN_HEIGHT = conf['display']['H']
 TYPE_SMALL = 1
 TYPE_MIDDLE = 2
 TYPE_BIG = 3
-
 
 class Bullet(pygame.sprite.Sprite):
     def __init__(self, bullet_img, init_pos):
@@ -100,7 +98,7 @@ class Enemy(pygame.sprite.Sprite):
        self.rect.topleft = init_pos
        self.down_imgs = enemy_down_imgs                         # Down 시 image
        self.speed = 2                                           # 이동 속도
-       self.HP = 10                                           # HP --> 총알을 맞고 버틸 수 있는 횟수
+       self.HP = E_HP                                           # HP --> 총알을 맞고 버틸 수 있는 횟수
        self.down_index = 0                                      # 죽은 후 몇 fps간 유지
 
     def move(self):
@@ -108,3 +106,7 @@ class Enemy(pygame.sprite.Sprite):
 
     def down_draw(self, screen):
         screen.blit(self.down_imgs[self.down_index // 2], self.rect)
+
+class Boss(pygame.sprite.Sprite):
+
+    def __init__(self, boss_img, boss_down_img, init_pos, B_HP):
