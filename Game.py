@@ -154,20 +154,20 @@ class Game():
             enemy_down.down_draw(screen)
         self.enemies.draw(screen)
 
-        # 점수 표기
+        # 점수 표기(score notation)
         score_font = pygame.font.Font(None, 36)
         score_text = score_font.render(str(self.score), True, (128, 128, 128))
         text_rect = score_text.get_rect()
         text_rect.topleft = [10, 10]
         screen.blit(score_text, text_rect)
 
-        # 게임 스크린 업데이트
+        # 게임 스크린 업데이트 (game screen update)
         pygame.display.update()
 
 
     def handleEvent(self):
         for event in pygame.event.get():
-            if event.type == pygame.QUIT:   # 종료 버튼
+            if event.type == pygame.QUIT:   # 종료 버튼 (quit button)
                 pygame.mixer_music.stop()
                 exit()
 
