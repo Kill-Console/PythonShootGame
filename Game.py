@@ -133,9 +133,9 @@ class Game():
                 continue
             enemy_down.down_index += 1
         
-        if self.player.killed>=2**player.level:
+        if self.player.killed>=2**self.player.level:
             self.player.level += 1
-            self.player.killed -= 2**player.level
+            self.player.killed -= 2**self.player.level
             self.player.speed += 1 
 
 
