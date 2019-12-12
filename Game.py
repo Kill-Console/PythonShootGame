@@ -55,7 +55,7 @@ class Game():
         player_rect = []
         player_rect.append(pygame.Rect(0, 99, 102, 126))        # default
         player_rect.append(pygame.Rect(165, 360, 102, 126))     # default
-        player_rect.append(pygame.Rect(165, 234, 102, 126))     # 총 맞은 이미지
+        player_rect.append(pygame.Rect(165, 234, 102, 126))     # 총 맞은 이미지 (Shooted image)
         player_rect.append(pygame.Rect(330, 624, 102, 126))
         player_rect.append(pygame.Rect(330, 498, 102, 126))
         player_rect.append(pygame.Rect(432, 624, 102, 126))
@@ -63,7 +63,7 @@ class Game():
         return Player(self.player_img, player_rect, player_pos)
 
 
-    # Enemy 정보 setting
+    # Enemy 정보 setting (setting enemy information)
     def setEnemy(self):
         self.enemy_rect = pygame.Rect(534, 612, 57, 43)
         self.enemy_img = self.player_img.subsurface(self.enemy_rect)
@@ -76,9 +76,9 @@ class Game():
 
     def update(self):
         '''
-            전체 게임 핵심 로직
+            전체 게임 핵심 로직(entire game core logic)
         '''
-        # Bullet 생성 --> while문을 15번 돌 때마다 생성
+        # Bullet 생성 --> while문을 15번 돌 때마다 생성(Create Bullet-> create bullet every 15 times while statement executed)
         if not self.player.is_hit:
             if self.shoot_frequency % 15 == 0:
                 self.bullet_sound.play()
@@ -87,7 +87,7 @@ class Game():
             if self.shoot_frequency >= 15:
                 self.shoot_frequency = 0
         
-        # Enemy 생성 --> while문을 50번 돌 때마다 생성
+        # Enemy 생성 --> while문을 50번 돌 때마다 생성(Create Enemy-> create bullet every 15 times while statement executed)
         if self.enemy_frequency % 50 == 0:
             enemy_pos = [random.randint(0, self.conf['display']['W'] - self.enemy_rect.width), 0]
             enemy = Enemy(self.enemy_img, self.enemy_down_imgs, enemy_pos, self.EHP)
@@ -96,32 +96,32 @@ class Game():
         if self.enemy_frequency >= 100:
             self.enemy_frequency = 0
 
-        # Bullet 처리 : 총알이 화면을 벗어나면 총알 삭제
+        # Bullet 처리 : 총알이 화면을 벗어나면 총알 삭제 (Bullet Handling: Delete Bullets When Bullets goes out of the screen)
         for bullet in self.player.bullets:
             bullet.move()
             if bullet.rect.bottom < 0:
                 self.player.bullets.remove(bullet)
 
-        # Enemy 처리
+        # Enemy 처리(Enemy Handling)
         for enemy in self.enemies:
             enemy.move()
-            # 플레이어와 적의 충돌 감지
+            # 플레이어와 적의 충돌 감지 (Detect collision between enemy and the player)
             if pygame.sprite.collide_circle(enemy, self.player):
                 self.enemies_down.add(enemy)
                 self.enemies.remove(enemy)
                 self.player.is_hit = True
                 self.game_over_sound.play()
                 break
-            # 적이 화면을 벗어나면 적을 삭제
+            # 적이 화면을 벗어나면 적을 삭제(Delete enemies when they are out of screen)
             if enemy.rect.top > self.conf['display']['H']:
                 self.enemies.remove(enemy)
         
-        # Player의 총알 맞은 enemies 처리
+        # Player의 총알 맞은 enemies 처리 (Handle enemies which hit by Player's bullet)
         cur_enemies_down = pygame.sprite.groupcollide(self.enemies, self.player.bullets, 1, 1)
         for enemy_down in cur_enemies_down:
             self.enemies_down.add(enemy_down)
 
-        #적이 죽을 때 경험치 1 획득, 10명 죽이면 레벨, 이속 +1
+        #적이 죽을 때 경험치 1 획득, 10명 죽이면 레벨, 이속 +1(Gain 1 XP when an enemy dies and if 10 enemies die player level and speed +1)
         for enemy_down in self.enemies_down: 
             enemy_down.HP -= 1
             if enemy_down.HP == 0:
@@ -133,7 +133,7 @@ class Game():
                 continue
             enemy_down.down_index += 1
         
-        # Player 레벨 조절
+        # Player 레벨 조절(player lever adjustment)
         if self.player.killed>=10:
             self.player.level += 1
             self.player.killed -= 10
@@ -144,7 +144,7 @@ class Game():
         screen = self.screen
         player = self.player
 
-        # Background
+        # 배경 (Background)
         screen.fill(0)
         screen.blit(self.background_img, (0, 0))
         
