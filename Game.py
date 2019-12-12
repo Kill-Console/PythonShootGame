@@ -134,9 +134,9 @@ class Game():
             enemy_down.down_index += 1
         
         # Player 레벨 조절
-        if self.player.killed>=10:
+        if self.player.killed>=2**player.level:
             self.player.level += 1
-            self.player.killed -= 10
+            self.player.killed -= 2**player.level
             self.player.speed += 1 
 
 

@@ -8,7 +8,7 @@ Created on Wed Sep 11 16:36:03 2013
 import yaml
 import pygame
 
-conf = yaml.load(open("./setting.yaml", "r"))
+conf = yaml.load(open("./setting.yaml", "r",encoding='UTF-8'))
 SCREEN_WIDTH = conf['display']['W']
 SCREEN_HEIGHT = conf['display']['H']
 
@@ -98,7 +98,7 @@ class Enemy(pygame.sprite.Sprite):
        self.rect.topleft = init_pos
        self.down_imgs = enemy_down_imgs                         # Down 시 image
        self.speed = 2                                           # 이동 속도
-       self.HP = E_HP                                           # HP --> 총알을 맞고 버틸 수 있는 횟수
+       self.HP = 10                                           # HP --> 총알을 맞고 버틸 수 있는 횟수
        self.down_index = 0                                      # 죽은 후 몇 fps간 유지
 
     def move(self):
