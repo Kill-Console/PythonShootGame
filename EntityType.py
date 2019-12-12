@@ -109,4 +109,11 @@ class Enemy(pygame.sprite.Sprite):
 
 class Boss(pygame.sprite.Sprite):
 
-    def __init__(self, boss_img, boss_down_img, init_pos, B_HP):
+    def __init__(self, boss_img, boss_down_img, init_pos, boss_level):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = boss_img
+        self.rect = self.image.get_rect()
+        self.rect.topleft = init_pos
+        self. down_imgs = boss_down_img
+        self.HP = boss_level*20
+        self.level = boss_level
