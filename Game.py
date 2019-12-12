@@ -63,6 +63,7 @@ class Game():
         return Player(self.player_img, player_rect, player_pos)
 
 
+
     # Enemy 정보 setting
     def setEnemy(self):
         self.enemy_rect = pygame.Rect(534, 612, 57, 43)
