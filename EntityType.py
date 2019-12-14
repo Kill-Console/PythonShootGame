@@ -17,7 +17,7 @@ TYPE_SMALL = 1
 TYPE_MIDDLE = 2
 TYPE_BIG = 3
 
-
+#총알 (Bullet)
 class Bullet(pygame.sprite.Sprite):
     def __init__(self, bullet_img, init_pos):
         pygame.sprite.Sprite.__init__(self)
@@ -30,15 +30,15 @@ class Bullet(pygame.sprite.Sprite):
         self.rect.top -= self.speed
 
 
-
+#플레이어 (Player)
 class Player(pygame.sprite.Sprite):
     def __init__(self, plane_img, player_rect, init_pos):
         pygame.sprite.Sprite.__init__(self)
-        self.image = []                                 # 用来存储玩家对象精灵图片的列表
+        self.image = []                                 # 플레이어 객체 이미지를 저장하는데 사용되는 목록
         for i in range(len(player_rect)):
             self.image.append(plane_img.subsurface(player_rect[i]).convert_alpha())
-        self.rect = player_rect[0]                      # 初始化图片所在的矩形
-        self.rect.topleft = init_pos                    # 初始化矩形的左上角坐标
+        self.rect = player_rect[0]                      # 사진이 들어가는 사각형을 초기화
+        self.rect.topleft = init_pos                    # 사각형 좌측 상단 모서리 좌표 초기화
         self.level = 1                                  # 플레이어 레벨
         self.speed = 4                                  # 初始化玩家速度，这里是一个确定的值
         self.bullets = pygame.sprite.Group()            # 玩家飞机所发射的子弹的集合
