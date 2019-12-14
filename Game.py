@@ -4,6 +4,8 @@ import pygame
 from EntityType import *
 from pygame.locals import *
 
+        
+
 class Game():
     def __init__(self, conf, screen):
         # Basic settings
@@ -11,14 +13,18 @@ class Game():
         self.screen =  screen
         self.load_image()
         self.load_music()
+        self.boss_level=1
+        self.boss_state=False
         
         # Objects
         self.player = self.setPlayer()
         self.enemies = pygame.sprite.Group()
         self.enemies_down = pygame.sprite.Group()
         self.setEnemy()
+        self.boss = self.setBoss()
 
         self.score = 0
+        self.score2 = 0
         self.EHP = 2                                         # 새로 생긴 적의 HP --> 난이도 조절 parameter
         self.shoot_frequency = 0
         self.enemy_frequency = 0
@@ -82,7 +88,9 @@ class Game():
         self.boss_down_imgs.append(self.player_img.subsurface(pygame.Rect(0,480,169,247)))
         self.boss_down_imgs.append(self.player_img.subsurface(pygame.Rect(0,230,169,247)))
         self.boss_down_imgs.append(self.player_img.subsurface(pygame.Rect(840,750,169,247)))    
+        return Boss(self.boss_img, self.boss_rect, boss_pos)
 
+        
     def update(self):
         '''
             전체 게임 핵심 로직
@@ -95,7 +103,15 @@ class Game():
             self.shoot_frequency += 1
             if self.shoot_frequency >= 15:
                 self.shoot_frequency = 0
-        
+        # bBullet 생성(when boss exist)
+        if self.boss_state==True:
+            if self.shoot_frequency % 15 == 0:
+                self.bullet_sound.play()
+                self.boss.shoot(self.bbullet_img)
+            self.shoot_frequency += 1
+            if self.shoot_frequency >= 15:
+                self.shoot_frequency = 0
+    
         # Enemy 생성 --> while문을 50번 돌 때마다 생성
         if self.enemy_frequency % 50 == 0:
             enemy_pos = [random.randint(0, self.conf['display']['W'] - self.enemy_rect.width), 0]
@@ -105,12 +121,26 @@ class Game():
         if self.enemy_frequency >= 100:
             self.enemy_frequency = 0
 
+        #boss 생성 --> 50000점마다 생성
+        if self.score2 > 50000:
+            self.score2-=50000
+            self.boss_level+=1
+            boss_pos = [random.randint(0, self.conf['display']['W'] - self.boss_rect.width), 0]
+            boss = Boss(self.boss_img, self.boss_down_imgs, boss_pos, self.boss_level)        
+            self.boss_state=True
+            
         # Bullet 처리 : 총알이 화면을 벗어나면 총알 삭제
         for bullet in self.player.bullets:
             bullet.move()
             if bullet.rect.bottom < 0:
                 self.player.bullets.remove(bullet)
 
+        # bBullet 처리 : 총알이 화면을 벗어나면 총알 삭제
+#        for bbullet in self.boss.bbullets:
+#            bbullet.move()
+#            if bbullet.rect.top > SCREEN_HEIGHT:
+#                self.boss.bbullets.remove(bbullet)
+        
         # Enemy 처리
         for enemy in self.enemies:
             enemy.move()
@@ -121,6 +151,13 @@ class Game():
                 self.player.is_hit = True
                 self.game_over_sound.play()
                 break
+            #보스와 플레이어의 충돌 감지
+#            if pygame.sprite.collide_circle(self.boss, self.player):
+#                self.boss.remove
+#                self.player.is_hit = True
+#                self.game_over_sound.play()
+#                break
+            
             # 적이 화면을 벗어나면 적을 삭제
             if enemy.rect.top > self.conf['display']['H']:
                 self.enemies.remove(enemy)
@@ -138,6 +175,7 @@ class Game():
             if enemy_down.down_index >= 7:
                 self.enemies_down.remove(enemy_down)
                 self.score += 1000
+                self.score2 +=5000
                 self.player.killed+=1
                 continue
             enemy_down.down_index += 1

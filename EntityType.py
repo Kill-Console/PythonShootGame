@@ -125,14 +125,15 @@ class Boss(pygame.sprite.Sprite):
         self.image = boss_img
         self.rect = self.image.get_rect()
         self.rect.topleft = init_pos
-        self. down_imgs = boss_down_img
+        self.down_imgs = boss_down_img
         self.HP = boss_level*20
         self.level = boss_level
+        self.bbullets = pygame.sprite.Group()
         
-    def make(self):
-        bullet = Bullet(bullet_img, self.rect.midtop)
-        self.bullets.add(bullet)
-
     def teleport(self):
         self.rect.top = randint(0,200)
         self.rect.left = randint(0, SCREEN_WIDTH-self.image.width)
+        
+    def shoot(self, bbullet_img):
+        bbullet = bBullet(bbullet_img, self.rect.midtop)
+        self.bbullets.add(bbullet)
