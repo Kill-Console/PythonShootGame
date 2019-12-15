@@ -97,7 +97,7 @@ class Game():
             self.enemy_frequency = 0
 
 	# Enemy Bullet 생성 --> while문을 15번 돌 때마다 생성(Create Enemy Bullet-> create bullet every 15 times while statement executed)
-	 if not self.enemies_down:
+        if not self.enemies_down:
             if self.shoot_frequency % 15 == 0:
                 self.bullet_sound.play()
                 self.player.shoot(self.bullet_img)
