@@ -40,10 +40,10 @@ class Player(pygame.sprite.Sprite):
         self.rect = player_rect[0]                      # 사진이 들어가는 사각형을 초기화
         self.rect.topleft = init_pos                    # 사각형 좌측 상단 모서리 좌표 초기화
         self.level = 1                                  # 플레이어 레벨
-        self.speed = 4                                  # 初始化玩家速度，这里是一个确定的值
-        self.bullets = pygame.sprite.Group()            # 玩家飞机所发射的子弹的集合
-        self.img_index = 0                              # 玩家精灵图片索引
-        self.is_hit = False                             # 玩家是否被击中
+        self.speed = 4                                  # 플레이어 속도 초기화
+        self.bullets = pygame.sprite.Group()            # 플레이어에 의해 발사된 총알 컬렉션
+        self.img_index = 0                              # 플레이어 이미지 색인
+        self.is_hit = False                             # 플레이어의 저격 여부
         self.hp = 3                                     # HP 변수 추가
         self.killed = 0                                 # 죽인 적 수
         self.alive = True
