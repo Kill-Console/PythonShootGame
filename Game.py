@@ -87,7 +87,7 @@ class Game():
             if self.shoot_frequency >= 15:
                 self.shoot_frequency = 0
         
-        # Enemy 생성 --> while문을 50번 돌 때마다 생성(Create Enemy-> create bullet every 15 times while statement executed)
+        # Enemy 생성 --> while문을 50번 돌 때마다 생성(Create Enemy-> create enemy every 50 times while statement executed)
         if self.enemy_frequency % 50 == 0:
             enemy_pos = [random.randint(0, self.conf['display']['W'] - self.enemy_rect.width), 0]
             enemy = Enemy(self.enemy_img, self.enemy_down_imgs, enemy_pos, self.EHP)
