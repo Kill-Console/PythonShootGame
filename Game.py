@@ -97,13 +97,13 @@ class Game():
             self.enemy_frequency = 0
 
 	# Enemy Bullet 생성 --> while문을 15번 돌 때마다 생성(Create Enemy Bullet-> create bullet every 15 times while statement executed)
-        if not self.enemies_down:
-            if self.shoot_frequency % 15 == 0:
-                self.bullet_sound.play()
-                self.player.shoot(self.bullet_img)
-            self.shoot_frequency += 1
-            if self.shoot_frequency >= 15:
-                self.shoot_frequency = 0
+#        if not self.enemy.is_hit:
+#            if self.shoot_frequency % 15 == 0:
+#                self.bullet_sound.play()
+#                self.player.shoot(self.bullet_img)
+#            self.shoot_frequency += 1
+#            if self.shoot_frequency >= 15:
+#                self.shoot_frequency = 0
 
         # Bullet 처리 : 총알이 화면을 벗어나면 총알 삭제 (Bullet Handling: Delete Bullets When Bullets goes out of the screen)
         for bullet in self.player.bullets:
@@ -135,6 +135,14 @@ class Game():
             enemy_down.HP -= 1
             if enemy_down.HP == 0:
                 self.enemy_down_sound.play()
+            else:
+                if not self.enemy.is_hit:
+                    if self.shoot_frequency % 15 == 0:
+                        self.bullet_sound.play()
+                        self.player.shoot(self.bullet_img)
+                    self.shoot_frequency += 1
+                    if self.shoot_frequency >= 15:
+                        self.shoot_frequency = 0
             if enemy_down.down_index >= 7:
                 self.enemies_down.remove(enemy_down)
                 self.score += 1000
