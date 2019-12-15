@@ -96,6 +96,15 @@ class Game():
         if self.enemy_frequency >= 100:
             self.enemy_frequency = 0
 
+	# Bullet 생성
+	 if not self.enemy.is_hit:
+            if self.shoot_frequency % 15 == 0:
+                self.bullet_sound.play()
+                self.player.shoot(self.bullet_img)
+            self.shoot_frequency += 1
+            if self.shoot_frequency >= 15:
+                self.shoot_frequency = 0
+
         # Bullet 처리 : 총알이 화면을 벗어나면 총알 삭제 (Bullet Handling: Delete Bullets When Bullets goes out of the screen)
         for bullet in self.player.bullets:
             bullet.move()
