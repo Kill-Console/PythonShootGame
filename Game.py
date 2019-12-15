@@ -78,7 +78,7 @@ class Game():
         '''
             전체 게임 핵심 로직(entire game core logic)
         '''
-        # Bullet 생성 --> while문을 15번 돌 때마다 생성(Create Bullet-> create bullet every 15 times while statement executed)
+        # Player Bullet 생성 --> while문을 15번 돌 때마다 생성(Create Player Bullet-> create bullet every 15 times while statement executed)
         if not self.player.is_hit:
             if self.shoot_frequency % 15 == 0:
                 self.bullet_sound.play()
@@ -96,7 +96,7 @@ class Game():
         if self.enemy_frequency >= 100:
             self.enemy_frequency = 0
 
-	# Bullet 생성
+	# Enemy Bullet 생성 --> while문을 15번 돌 때마다 생성(Create Enemy Bullet-> create bullet every 15 times while statement executed)
 	 if not self.enemy.is_hit:
             if self.shoot_frequency % 15 == 0:
                 self.bullet_sound.play()
