@@ -16,7 +16,7 @@ from Game import Game
 if __name__ == "__main__":
 
     # Setting loading
-    conf = yaml.load(open("./setting.yaml", "r"))
+    conf = yaml.load(open("./setting.yaml", "r",encoding='UTF-8'))
 
     # Pygame 기본 설정    
     pygame.init()
