@@ -34,14 +34,21 @@ if __name__ == "__main__":
             game.draw()             # UI 렌더링
             game.handleEvent()      # I/O 처리
         
+        # Game over
         game.draw_gameover(game.screen)
 
         for event in pygame.event.get():
+            # 게임 종료
             if event.type == pygame.QUIT:
+                print("1")
                 pygame.quit()
                 exit()
-            if event.type == pygame.KEYUP:
-                pressed = pygame.key.get_pressed()
-                
+            key_pressed = pygame.key.get_pressed()
+
+            if key_pressed[K_r]:                                # Press R to restart
+                game = Game(conf, window)
+            if key_pressed[K_q] or key_pressed[K_ESCAPE] :      # Press ESC or Q to quit
+                pygame.quit()
+                exit()
 
         pygame.display.update()

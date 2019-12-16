@@ -11,9 +11,9 @@ This project only include three simple .py files:
 3. EntityType.py: Classes for game (Player / Bullet / Enemy) 
 
 # Rule
-+ 적이 한 번 죽을 때 마다 경험치 1
++ 적이 한 번 죽을 때 마다 점수 1000 증가
 + 적을 10번 죽이면 이동 속도 증가 / Level 증가
-+ 
+
 
 # Requirement
 

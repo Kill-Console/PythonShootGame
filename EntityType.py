@@ -119,6 +119,7 @@ class Methor(pygame.sprite.Sprite):
         self.speed = speed
 
     def move(self):
+        pass
     
     def draw(self, screen):
         screen.blit(self.image, self.rect)

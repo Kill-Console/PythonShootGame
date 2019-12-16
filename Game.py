@@ -183,10 +183,25 @@ class Game():
 
     def draw_gameover(self, screen):
         font = pygame.font.Font(None, 48)
-        text = font.render('Score: '+ str(self.score), True, (255, 0, 0))
-        text_rect = text.get_rect()
-        text_rect.centerx = screen.get_rect().centerx
-        text_rect.centery = screen.get_rect().centery + 24
+
+        score_alert = font.render('Score: '+ str(self.score), True, (255, 0, 0))    # Render score (red)
+        score_rect = score_alert.get_rect()
+        score_rect.centerx = screen.get_rect().centerx
+        score_rect.centery = screen.get_rect().centery + 24
+        
+        font = pygame.font.Font(None, 30)
+        restart = font.render("Press R to restart", True, (255, 0, 0))       # Render restart
+        restart_rect = restart.get_rect()
+        restart_rect.centerx = screen.get_rect().centerx
+        restart_rect.centery = screen.get_rect().centery + 80  
+
+        quit_game = font.render("Press ESC or Q to quit", True, (255, 0, 0))     # Render quit
+        quit_rect = quit_game.get_rect()
+        quit_rect.centerx = screen.get_rect().centerx
+        quit_rect.centery = screen.get_rect().centery + 110
+
         screen.blit(self.gameover_img, (0, 0))
-        screen.blit(text, text_rect)
+        screen.blit(score_alert, score_rect)
+        screen.blit(restart, restart_rect)
+        screen.blit(quit_game, quit_rect)
 
