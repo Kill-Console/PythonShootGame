@@ -48,7 +48,7 @@ class Game():
         self.player_img = pygame.image.load(imgs['player'])
         bullet_rect = pygame.Rect(1004, 987, 9, 21)
         self.bullet_img = self.player_img.subsurface(bullet_rect)
-    
+        self.bullet_img = self.enemy_img.subserface(bullet_rect)    
 
     # Player 정보 setting 및 객체 생성 (Player information setting and object creation)
     def setPlayer(self):
@@ -97,19 +97,23 @@ class Game():
             self.enemy_frequency = 0
 
 	# Enemy Bullet 생성 --> while문을 15번 돌 때마다 생성(Create Enemy Bullet-> create bullet every 15 times while statement executed)
-#        if not self.enemy.is_hit:
-#            if self.shoot_frequency % 15 == 0:
-#                self.bullet_sound.play()
-#                self.player.shoot(self.bullet_img)
-#            self.shoot_frequency += 1
-#            if self.shoot_frequency >= 15:
-#                self.shoot_frequency = 0
+        #if not self.enemy.is_hit:
+            if self.shoot_frequency % 15 == 0:
+                self.bullet_sound.play()
+                self.enemy.shoot(self.bullet_img)
+            self.shoot_frequency += 1
+            if self.shoot_frequency >= 15:
+                self.shoot_frequency = 0
 
         # Bullet 처리 : 총알이 화면을 벗어나면 총알 삭제 (Bullet Handling: Delete Bullets When Bullets goes out of the screen)
         for bullet in self.player.bullets:
             bullet.move()
             if bullet.rect.bottom < 0:
                 self.player.bullets.remove(bullet)
+        for bullet in self.enemy.bullets:
+            bullet.move()
+            if bullet.rect.bottom < 0:
+                self.enemy.bullets.remove(bullet)
 
         # Enemy 처리(Enemy Handling)
         for enemy in self.enemies:
@@ -135,14 +139,6 @@ class Game():
             enemy_down.HP -= 1
             if enemy_down.HP == 0:
                 self.enemy_down_sound.play()
-            else:
-                if not self.enemy.is_hit:
-                    if self.shoot_frequency % 15 == 0:
-                        self.bullet_sound.play()
-                        self.player.shoot(self.bullet_img)
-                    self.shoot_frequency += 1
-                    if self.shoot_frequency >= 15:
-                        self.shoot_frequency = 0
             if enemy_down.down_index >= 7:
                 self.enemies_down.remove(enemy_down)
                 self.score += 1000

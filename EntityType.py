@@ -29,6 +29,17 @@ class Bullet(pygame.sprite.Sprite):
     def move(self):
         self.rect.top -= self.speed
 
+class Bullet_enemy(pygame.sprite.Sprite):
+    def __init__(self, bullet_img, init_pos):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = bullet_img
+        self.rect = self.image.get_rect()
+        self.rect.midbottom = init_pos
+        self.speed = -10
+
+    def move(self):
+        self.rect.bottom += self.speed
+
 
 #플레이어 (Player)
 class Player(pygame.sprite.Sprite):
@@ -99,6 +110,7 @@ class Enemy(pygame.sprite.Sprite):
        self.image = enemy_img                                   # Default image
        self.rect = self.image.get_rect()
        self.rect.topleft = init_pos
+       self.bullets = pygame.sprite.Group()
        self.down_imgs = enemy_down_imgs                         # Down 시 image
        self.speed = 2                                           # 이동 속도
        self.HP = E_HP                                           # HP --> 총알을 맞고 버틸 수 있는 횟수
@@ -107,5 +119,22 @@ class Enemy(pygame.sprite.Sprite):
     def move(self):
         self.rect.top += self.speed
 
+    def shoot(self, bullet_img):
+        bullet = Bullet_enemy(bullet_img, self.rect.midtop)
+        self.bullets.add(bullet)
+
+#    def down_draw(self, screen):
+ #       screen.blit(self.down_imgs[self.down_index // 2], self.rect)
+
     def down_draw(self, screen):
-        screen.blit(self.down_imgs[self.down_index // 2], self.rect)
+        if not self.is_hit:
+            screen.blit(self.image[self.img_index], self.rect)
+            self.img_index = 80 // 8
+        else:
+            self.img_index = self.enemy_down_index // 8
+            screen.blit(self.down_imgs[self.down_index // 2], self.rect)
+#self.image[self.img_index], self.rect)
+            self.enemy_down_index += 1
+            if self.enemy_down_index > 47:
+                self.alive = False
+        self.bullets.draw(screen)
