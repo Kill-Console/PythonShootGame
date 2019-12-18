@@ -151,6 +151,4 @@ class Boss(pygame.sprite.Sprite):
 #            if self.player_down_index > 47:
 #                self.alive = False
         self.bbullets.draw(screen)
-    def __del__(self):
-        pygame.sprite.Sprite.__del__(self)
         
