@@ -12,7 +12,7 @@ This project only include three simple .py files:
 
 # Rule
 + 적이 한 번 죽을 때 마다 점수 1000 증가
-+ 적을 10번 죽이면 이동 속도 증가 / Level 증가
++ 2^(플레이어 레벨) 만큼의 적을 죽일 때마다 레벨업
 
 
 # Requirement
