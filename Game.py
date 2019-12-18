@@ -28,6 +28,7 @@ class Game():
         self.EHP = 2                                         # 새로 생긴 적의 HP --> 난이도 조절 parameter
         self.shoot_frequency = 0
         self.enemy_frequency = 0
+        self.bshoot_frequency = 0
 
 
     # BGM 및 효과음 로딩 & 재생
@@ -106,12 +107,12 @@ class Game():
                 self.shoot_frequency = 0
         # bBullet 생성(when boss exist)
         if self.boss_state==True:
-            if self.shoot_frequency % 100 == 0:
+            if self.bshoot_frequency % 100 == 0:
                 self.bullet_sound.play()
                 self.boss.shoot(self.bbullet_img)
-            self.shoot_frequency += 1
-            if self.shoot_frequency >= 15:
-                self.shoot_frequency = 0
+            self.bshoot_frequency += 1
+            if self.bshoot_frequency >= 100:
+                self.bshoot_frequency = 0
     
         # Enemy 생성 --> while문을 50번 돌 때마다 생성
         if self.enemy_frequency % 50 == 0:
@@ -136,6 +137,8 @@ class Game():
             if pygame.sprite.collide_circle(bullet, self.boss) and self.boss_state==True:
                 self.boss.HP-=1
                 self.player.bullets.remove(bullet)
+                if self.boss.HP==0:
+                    self.boss_state=False
             if bullet.rect.bottom < 0:
                 self.player.bullets.remove(bullet)
     
@@ -193,7 +196,7 @@ class Game():
             if enemy_down.down_index >= 7:
                 self.enemies_down.remove(enemy_down)
                 self.score += 1000
-                self.score2 +=2000
+                self.score2 +=1000
                 self.player.killed+=1
                 continue
             enemy_down.down_index += 1

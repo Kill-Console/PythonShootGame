@@ -139,7 +139,7 @@ class Boss(pygame.sprite.Sprite):
     def shoot(self, bbullet_img):
         x = self.pos[0]
         y = self.pos[1]
-        bbullet = bBullet(bbullet_img,min(self.level,15),(random.randint(x,x+80),y+20) )
+        bbullet = bBullet(bbullet_img,random.randint(3,7),(random.randint(x,x+169),y+100) )
         self.bbullets.add(bbullet)
 
     def draw(self, screen):
