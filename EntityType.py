@@ -7,6 +7,7 @@ Created on Wed Sep 11 16:36:03 2013
 
 import yaml
 import pygame
+import random
 
 conf = yaml.load(open("./setting.yaml", "r",encoding='UTF-8'))
 SCREEN_WIDTH = conf['display']['W']
@@ -129,13 +130,16 @@ class Boss(pygame.sprite.Sprite):
         self.HP = boss_level*20
         self.level = boss_level
         self.bbullets = pygame.sprite.Group()
+        self.pos = init_pos
         
     def teleport(self):
         self.rect.top = randint(0,200)
         self.rect.left = randint(0, SCREEN_WIDTH-self.image.width)
         
     def shoot(self, bbullet_img):
-        bbullet = bBullet(bbullet_img,min(self.level,15), self.rect.midtop)
+        x = self.pos[0]
+        y = self.pos[1]
+        bbullet = bBullet(bbullet_img,min(self.level,15),(random.randint(x,x+80),y+20) )
         self.bbullets.add(bbullet)
 
     def draw(self, screen):
@@ -147,3 +151,6 @@ class Boss(pygame.sprite.Sprite):
 #            if self.player_down_index > 47:
 #                self.alive = False
         self.bbullets.draw(screen)
+    def __del__(self):
+        pygame.sprite.Sprite.__del__(self)
+        

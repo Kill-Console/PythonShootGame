@@ -88,10 +88,9 @@ class Game():
         self.boss_down_imgs.append(self.player_img.subsurface(pygame.Rect(0,480,169,247)))
         self.boss_down_imgs.append(self.player_img.subsurface(pygame.Rect(0,230,169,247)))
         self.boss_down_imgs.append(self.player_img.subsurface(pygame.Rect(840,750,169,247)))
-        boss_pos = [200,100]
+        boss_pos = [150,20]
         return Boss(self.boss_img, self.boss_rect, boss_pos,self.boss_level)
-
-    remove(Boss)
+    
         
     def update(self):
         '''
@@ -107,7 +106,7 @@ class Game():
                 self.shoot_frequency = 0
         # bBullet 생성(when boss exist)
         if self.boss_state==True:
-            if self.shoot_frequency % 15 == 0:
+            if self.shoot_frequency % 100 == 0:
                 self.bullet_sound.play()
                 self.boss.shoot(self.bbullet_img)
             self.shoot_frequency += 1
@@ -134,7 +133,7 @@ class Game():
         # Bullet 처리 : 총알이 화면을 벗어나면 총알 삭제
         for bullet in self.player.bullets:
             bullet.move()
-            if pygame.sprite.collide_circle(bullet, self.boss):
+            if pygame.sprite.collide_circle(bullet, self.boss) and self.boss_state==True:
                 self.boss.HP-=1
                 self.player.bullets.remove(bullet)
             if bullet.rect.bottom < 0:
@@ -176,7 +175,7 @@ class Game():
                 self.enemies.remove(enemy)
 
         #보스와 플레이어의 충돌 감지
-        if pygame.sprite.collide_circle(self.boss, self.player):
+        if pygame.sprite.collide_circle(self.boss, self.player) and boss_state==True:
             self.boss.remove
             self.player.is_hit = True
             self.game_over_sound.play()
