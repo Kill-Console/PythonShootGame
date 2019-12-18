@@ -135,5 +135,15 @@ class Boss(pygame.sprite.Sprite):
         self.rect.left = randint(0, SCREEN_WIDTH-self.image.width)
         
     def shoot(self, bbullet_img):
-        bbullet = bBullet(bbullet_img, self.rect.midtop)
+        bbullet = bBullet(bbullet_img,min(self.level,15), self.rect.midtop)
         self.bbullets.add(bbullet)
+
+    def draw(self, screen):
+        if not self.HP==0:
+            screen.blit(self.image, self.rect)
+#        else:
+#            screen.blit(self.image[self.img_index], self.rect)
+#            self.player_down_index += 1
+#            if self.player_down_index > 47:
+#                self.alive = False
+        self.bbullets.draw(screen)

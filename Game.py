@@ -87,9 +87,11 @@ class Game():
         self.boss_down_imgs = []
         self.boss_down_imgs.append(self.player_img.subsurface(pygame.Rect(0,480,169,247)))
         self.boss_down_imgs.append(self.player_img.subsurface(pygame.Rect(0,230,169,247)))
-        self.boss_down_imgs.append(self.player_img.subsurface(pygame.Rect(840,750,169,247)))    
-        return Boss(self.boss_img, self.boss_rect, boss_pos)
+        self.boss_down_imgs.append(self.player_img.subsurface(pygame.Rect(840,750,169,247)))
+        boss_pos = [200,100]
+        return Boss(self.boss_img, self.boss_rect, boss_pos,self.boss_level)
 
+    remove(Boss)
         
     def update(self):
         '''
@@ -122,24 +124,34 @@ class Game():
             self.enemy_frequency = 0
 
         #boss 생성 --> 50000점마다 생성
-        if self.score2 > 50000:
+        if self.score2 > 50000 and self.boss_state==False:
             self.score2-=50000
             self.boss_level+=1
             boss_pos = [random.randint(0, self.conf['display']['W'] - self.boss_rect.width), 0]
             boss = Boss(self.boss_img, self.boss_down_imgs, boss_pos, self.boss_level)        
             self.boss_state=True
-            
+        
         # Bullet 처리 : 총알이 화면을 벗어나면 총알 삭제
         for bullet in self.player.bullets:
             bullet.move()
+            if pygame.sprite.collide_circle(bullet, self.boss):
+                self.boss.HP-=1
+                self.player.bullets.remove(bullet)
             if bullet.rect.bottom < 0:
                 self.player.bullets.remove(bullet)
+    
 
         # bBullet 처리 : 총알이 화면을 벗어나면 총알 삭제
-#        for bbullet in self.boss.bbullets:
-#            bbullet.move()
-#            if bbullet.rect.top > SCREEN_HEIGHT:
-#                self.boss.bbullets.remove(bbullet)
+        for bbullet in self.boss.bbullets:
+            bbullet.move()
+         #플레이어와 보스 총알의 충돌 감지
+            if pygame.sprite.collide_circle(bbullet, self.player):
+                self.enemies.remove(bbullet)
+                self.player.is_hit = True
+                self.game_over_sound.play()
+                break
+            if bbullet.rect.top > SCREEN_HEIGHT:
+                self.boss.bbullets.remove(bbullet)
         
         # Enemy 처리
         for enemy in self.enemies:
@@ -151,17 +163,24 @@ class Game():
                 self.player.is_hit = True
                 self.game_over_sound.play()
                 break
-            #보스와 플레이어의 충돌 감지
-#            if pygame.sprite.collide_circle(self.boss, self.player):
-#                self.boss.remove
-#                self.player.is_hit = True
-#                self.game_over_sound.play()
-#                break
+            if pygame.sprite.collide_circle(enemy, self.player):
+                self.enemies_down.add(enemy)
+                self.enemies.remove(enemy)
+                self.player.is_hit = True
+                self.game_over_sound.play()
+                break
+
             
             # 적이 화면을 벗어나면 적을 삭제
             if enemy.rect.top > self.conf['display']['H']:
                 self.enemies.remove(enemy)
-        
+
+        #보스와 플레이어의 충돌 감지
+        if pygame.sprite.collide_circle(self.boss, self.player):
+            self.boss.remove
+            self.player.is_hit = True
+            self.game_over_sound.play()
+            
         # Player의 총알 맞은 enemies 처리
         cur_enemies_down = pygame.sprite.groupcollide(self.enemies, self.player.bullets, 1, 1)
         for enemy_down in cur_enemies_down:
@@ -175,7 +194,7 @@ class Game():
             if enemy_down.down_index >= 7:
                 self.enemies_down.remove(enemy_down)
                 self.score += 1000
-                self.score2 +=5000
+                self.score2 +=2000
                 self.player.killed+=1
                 continue
             enemy_down.down_index += 1
@@ -190,6 +209,7 @@ class Game():
     def draw(self):
         screen = self.screen
         player = self.player
+        boss = self.boss
 
         # Background
         screen.fill(0)
@@ -197,6 +217,8 @@ class Game():
         
         # Entities
         self.player.draw(self.screen, self.shoot_frequency)
+        if self.boss_state==True:
+            self.boss.draw(self.screen)
         for enemy_down in self.enemies_down: 
             enemy_down.down_draw(screen)
         self.enemies.draw(screen)
@@ -237,4 +259,3 @@ class Game():
         text_rect.centery = screen.get_rect().centery + 24
         screen.blit(self.gameover_img, (0, 0))
         screen.blit(text, text_rect)
-
