@@ -28,16 +28,16 @@ A simple shoot game written in Python.
 
 # Team member of team 03
 
-h1<김의연 (Team Leader)>
+### 김의연 (Team Leader)
 + student ID: 2017311385
 + Role: 코드 구조 변경, 운석 떨어뜨리기
-h1<박수환>
+### 박수환
 + student ID: 2018312229
 + Role: 보스 만들기
-h1<안현우>
+### 안현우
 + student ID: 2018313516
 + Role: 주석, 번역 및 발표
-h1<김민성>
+### 김민성
 + student ID: 2018312663
 + Role: Github io 제작
 
