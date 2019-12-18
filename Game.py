@@ -24,7 +24,6 @@ class Game():
         self.enemy_frequency = 0
 
 
-
     # BGM 및 효과음 로딩 & 재생
     def load_music(self): 
         sounds = self.conf['sounds']
