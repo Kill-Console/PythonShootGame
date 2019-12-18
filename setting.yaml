@@ -14,3 +14,4 @@ images:
   background: "resources/image/background.png"
   gameover: "resources/image/gameover.png"
   player: "resources/image/shoot.png"
+  methor: "resources/image/rock15.png"

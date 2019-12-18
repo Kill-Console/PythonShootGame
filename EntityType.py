@@ -114,12 +114,13 @@ class Methor(pygame.sprite.Sprite):
     def __init__(self, img, init_pos, speed):
         pygame.sprite.Sprite.__init__(self)
         self.image = img
-        self.rect = self.image.get_rect()
+        self.pos = init_pos
+        self.rect = img.get_rect()
         self.rect.topleft = init_pos
         self.speed = speed
 
     def move(self):
-        pass
+        self.rect.top += self.speed
     
     def draw(self, screen):
         screen.blit(self.image, self.rect)
