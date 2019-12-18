@@ -5,9 +5,9 @@ Created on Wed Sep 11 16:36:03 2013
 @author: Leo
 """
 
-
 import yaml
 import pygame
+import random
 
 conf = yaml.load(open("./setting.yaml", "r",encoding='UTF-8'))
 SCREEN_WIDTH = conf['display']['W']
@@ -16,7 +16,6 @@ SCREEN_HEIGHT = conf['display']['H']
 TYPE_SMALL = 1
 TYPE_MIDDLE = 2
 TYPE_BIG = 3
-
 
 class Bullet(pygame.sprite.Sprite):
     def __init__(self, bullet_img, init_pos):
@@ -100,7 +99,7 @@ class Enemy(pygame.sprite.Sprite):
        self.rect.topleft = init_pos
        self.down_imgs = enemy_down_imgs                         # Down 시 image
        self.speed = 2                                           # 이동 속도
-       self.HP = 10                                           # HP --> 총알을 맞고 버틸 수 있는 횟수
+       self.HP = E_HP                                           # HP --> 총알을 맞고 버틸 수 있는 횟수
        self.down_index = 0                                      # 죽은 후 몇 fps간 유지
 
     def move(self):
@@ -124,3 +123,48 @@ class Methor(pygame.sprite.Sprite):
     
     def draw(self, screen):
         screen.blit(self.image, self.rect)
+
+class bBullet(pygame.sprite.Sprite):
+    def __init__(self, bbullet_img,bbullet_speed, init_pos):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = bbullet_img
+        self.rect = self.image.get_rect()
+        self.rect.midbottom = init_pos
+        self.speed = bbullet_speed
+
+    def move(self):
+        self.rect.top += self.speed
+
+class Boss(pygame.sprite.Sprite):
+
+    def __init__(self, boss_img, boss_down_img, init_pos, boss_level):
+        pygame.sprite.Sprite.__init__(self)
+        self.image = boss_img
+        self.rect = self.image.get_rect()
+        self.rect.topleft = init_pos
+        self.down_imgs = boss_down_img
+        self.HP = boss_level*20
+        self.level = boss_level
+        self.bbullets = pygame.sprite.Group()
+        self.pos = init_pos
+        
+    def teleport(self):
+        self.rect.top = randint(0,200)
+        self.rect.left = randint(0, SCREEN_WIDTH-self.image.width)
+        
+    def shoot(self, bbullet_img):
+        x = self.pos[0]
+        y = self.pos[1]
+        bbullet = bBullet(bbullet_img,random.randint(3,7),(random.randint(x,x+169),y+100) )
+        self.bbullets.add(bbullet)
+
+    def draw(self, screen):
+        if not self.HP==0:
+            screen.blit(self.image, self.rect)
+#        else:
+#            screen.blit(self.image[self.img_index], self.rect)
+#            self.player_down_index += 1
+#            if self.player_down_index > 47:
+#                self.alive = False
+        self.bbullets.draw(screen)
+        
