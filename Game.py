@@ -139,23 +139,16 @@ class Game():
             self.player.level += 1
             self.player.killed -= 2**self.player.level
             self.player.speed += 1
-            a = random.randrange(1,5)
+            a = random.randrange(1,3)
             
             if(a==1):
                 for i in range(50):
                     self.player.moveLeft()
                     
-            elif(a==2):
-                for i in range(50):
-                    self.player.moveRight()
-                    
-            elif(a==3):
-                for i in range(50):
-                    self.player.moveUp()
-                    
             else:
                 for i in range(50):
-                    self.player.moveDown()
+                    self.player.moveRight()
+                
 
 
     def draw(self):
