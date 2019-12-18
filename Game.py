@@ -1,5 +1,6 @@
 import random
 import pygame
+import random
 
 from EntityType import *
 from pygame.locals import *
@@ -65,6 +66,7 @@ class Game():
         player_rect.append(pygame.Rect(432, 624, 102, 126))
         player_pos = [200, 600]
         return Player(self.player_img, player_rect, player_pos)
+
 
 
     # Enemy 정보 setting
@@ -160,7 +162,17 @@ class Game():
         if self.player.killed>=2**self.player.level:
             self.player.level += 1
             self.player.killed -= 2**self.player.level
-            self.player.speed += 1 
+            self.player.speed += 1
+            a = random.randrange(1,3)
+            
+            if(a==1):
+                for i in range(50):
+                    self.player.moveLeft()
+                    
+            else:
+                for i in range(50):
+                    self.player.moveRight()
+                
 
 
     def draw(self):
