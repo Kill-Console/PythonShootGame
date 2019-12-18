@@ -34,21 +34,21 @@ class Game():
 
         self.score = 0
         self.score2 = 0
-        self.EHP = 2                                         # 새로 생긴 적의 HP --> 난이도 조절 parameter
+        self.EHP = 2           # 새로 생긴 적의 HP --> 난이도 조절 parameter (New enemy's HP-> difficulty control parameter)
         self.shoot_frequency = 0
         self.enemy_frequency = 0
         self.methor_frequency = 0
         self.bshoot_frequency = 0
 
 
-    # BGM 및 효과음 로딩 & 재생
+    # BGM 및 효과음 로딩 & 재생(BGM & Sound Effects Loading & Playback)
     def load_music(self): 
         sounds = self.conf['sounds']
         self.bullet_sound = pygame.mixer.Sound(sounds['bullet'])
         self.enemy_down_sound = pygame.mixer.Sound(sounds['E_down'])
         self.game_over_sound = pygame.mixer.Sound(sounds['gameover'])
         
-        self.bullet_sound.set_volume(0.3)                       # volume : 0 ~ 1 사이의 값 
+        self.bullet_sound.set_volume(0.3)           # volume : 0 ~ 1 사이의 값(volume: a value between 0 and 1) 
         self.enemy_down_sound.set_volume(0.3)
         self.game_over_sound.set_volume(0.3)
         
@@ -57,7 +57,7 @@ class Game():
         pygame.mixer.music.set_volume(0.25)
 
 
-    # 게임에 필요한 이미지 로딩
+    # 게임에 필요한 이미지 로딩(Image loading for game)
     def load_image(self):
         imgs = self.conf['images']              
         self.background_img = pygame.image.load(imgs['background']).convert()
@@ -72,7 +72,7 @@ class Game():
     
         bbullet_rect = pygame.Rect(69,78,9,21)
         self.bbullet_img = self.player_img.subsurface(bbullet_rect)
-    # Player 정보 setting 및 객체 생성
+     # Player 정보 setting 및 객체 생성 (Player information setting and object creation)
     def setPlayer(self):
         player_rect = []
         player_rect.append(pygame.Rect(0, 99, 102, 126))        # default
@@ -86,7 +86,7 @@ class Game():
 
 
 
-    # Enemy 정보 setting
+    # Enemy 정보 setting (setting enemy information)
     def setEnemy(self):
         self.enemy_rect = pygame.Rect(534, 612, 57, 43)
         self.enemy_img = self.player_img.subsurface(self.enemy_rect)
@@ -112,7 +112,7 @@ class Game():
         '''
             전체 게임 핵심 로직
         '''
-        # Bullet 생성 --> while문을 15번 돌 때마다 생성
+        # Player Bullet 생성 --> while문을 15번 돌 때마다 생성(Create Player Bullet-> create bullet every 15 times while statement executed)
         if not self.player.is_hit:
             if self.shoot_frequency % 15 == 0:
                 self.bullet_sound.play()
@@ -129,7 +129,7 @@ class Game():
             if self.bshoot_frequency >= 100:
                 self.bshoot_frequency = 0
     
-        # Enemy 생성 --> while문을 50번 돌 때마다 생성
+        # Enemy 생성 --> while문을 50번 돌 때마다 생성(Create Enemy-> create enemy every 50 times while statement executed)
         if self.enemy_frequency % 50 == 0:
             enemy_pos = [random.randint(0, self.conf['display']['W'] - self.enemy_rect.width), 0]
             enemy = Enemy(self.enemy_img, self.enemy_down_imgs, enemy_pos, self.EHP)
@@ -164,8 +164,17 @@ class Game():
             boss_pos = [random.randint(0, self.conf['display']['W'] - self.boss_rect.width), 0]
             boss = Boss(self.boss_img, self.boss_down_imgs, boss_pos, self.boss_level)        
             self.boss_state=True
-        
-        # Bullet 처리 : 총알이 화면을 벗어나면 총알 삭제
+
+# Enemy Bullet 생성 --> while문을 15번 돌 때마다 생성(Create Enemy Bullet-> create bullet every 15 times while statement executed)
+        #if not self.enemy.is_hit:
+            #if self.shoot_frequency % 15 == 0:
+             #   self.bullet_sound.play()
+              #  self.enemy.shoot(self.bullet_img)
+           # self.shoot_frequency += 1
+            #if self.shoot_frequency >= 15:
+             #   self.shoot_frequency = 0
+
+         # Bullet 처리 : 총알이 화면을 벗어나면 총알 삭제 (Bullet Handling: Delete Bullets When Bullets goes out of the screen)
         for bullet in self.player.bullets:
             bullet.move()
             if pygame.sprite.collide_circle(bullet, self.boss) and self.boss_state==True:
@@ -177,10 +186,10 @@ class Game():
                 self.player.bullets.remove(bullet)
     
 
-        # bBullet 처리 : 총알이 화면을 벗어나면 총알 삭제
+        # bBullet 처리 : 총알이 화면을 벗어나면 총알 삭제 (Bullet Handling: Delete Bullets When Bullets goes out of the screen)
         for bbullet in self.boss.bbullets:
             bbullet.move()
-         #플레이어와 보스 총알의 충돌 감지
+         #플레이어와 보스 총알의 충돌 감지(Detect collision between the boss and the player)
             if pygame.sprite.collide_circle(bbullet, self.player):
                 self.enemies.remove(bbullet)
                 self.player.is_hit = True
@@ -189,10 +198,10 @@ class Game():
             if bbullet.rect.top > SCREEN_HEIGHT:
                 self.boss.bbullets.remove(bbullet)
         
-        # Enemy 처리
+        # Enemy 처리(Enemy Handling)
         for enemy in self.enemies:
             enemy.move()
-            # 플레이어와 적의 충돌 감지
+            # 플레이어와 적의 충돌 감지 (Detect collision between enemy and the player)
             if pygame.sprite.collide_circle(enemy, self.player):
                 self.enemies_down.add(enemy)
                 self.enemies.remove(enemy)
@@ -207,7 +216,7 @@ class Game():
                 break
 
             
-            # 적이 화면을 벗어나면 적을 삭제
+            # 적이 화면을 벗어나면 적을 삭제(Delete enemies when they are out of screen)
             if enemy.rect.top > self.conf['display']['H']:
                 self.enemies.remove(enemy)
 
@@ -216,13 +225,13 @@ class Game():
             self.boss.remove
             self.player.is_hit = True
             self.game_over_sound.play()
-            
-        # Player의 총알 맞은 enemies 처리
+
+        # Player의 총알 맞은 enemies 처리 (Handle enemies which hit by Player's bullet)    
         cur_enemies_down = pygame.sprite.groupcollide(self.enemies, self.player.bullets, 1, 1)
         for enemy_down in cur_enemies_down:
             self.enemies_down.add(enemy_down)
 
-        #적이 죽을 때 경험치 1 획득, 2^(플레이어 레벨)이 레벨업 조건(현재 상한 없음)
+        #적이 죽을 때 경험치 1 획득, 2^(플레이어 레벨)이 레벨업 조건(현재 상한 없음)(Gain 1 XP when an enemy dies, 2^(player level) is the level up condition(no upper boune))
         for enemy_down in self.enemies_down: 
             enemy_down.HP -= 1
             if enemy_down.HP == 0:
@@ -235,7 +244,7 @@ class Game():
                 continue
             enemy_down.down_index += 1
         
-        # Player 레벨 조절
+        # Player 레벨 조절(player lever adjustment)
         if self.player.killed>=2**self.player.level:
             self.player.level += 1
             self.player.killed -= 2**self.player.level
@@ -263,7 +272,7 @@ class Game():
         player = self.player
         boss = self.boss
 
-        # Background
+        # 배경 (Background)
         screen.fill(0)
         screen.blit(self.background_img, (0, 0))
         
@@ -276,20 +285,20 @@ class Game():
         self.enemies.draw(screen)
         self.methors.draw(screen)
 
-        # 점수 표기
+        # 점수 표기(score notation)
         score_font = pygame.font.Font(None, 36)
         score_text = score_font.render(str(self.score), True, (128, 128, 128))
         text_rect = score_text.get_rect()
         text_rect.topleft = [10, 10]
         screen.blit(score_text, text_rect)
 
-        # 게임 스크린 업데이트
+        # 게임 스크린 업데이트(game screen update)
         pygame.display.update()
 
 
     def handleEvent(self):
         for event in pygame.event.get():
-            if event.type == pygame.QUIT:   # 종료 버튼
+            if event.type == pygame.QUIT:   # 종료 버튼 (quit button)
                 pygame.mixer_music.stop()
                 exit()
 
