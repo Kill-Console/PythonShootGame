@@ -161,10 +161,5 @@ class Boss(pygame.sprite.Sprite):
     def draw(self, screen):
         if not self.HP==0:
             screen.blit(self.image, self.rect)
-#        else:
-#            screen.blit(self.image[self.img_index], self.rect)
-#            self.player_down_index += 1
-#            if self.player_down_index > 47:
-#                self.alive = False
         self.bbullets.draw(screen)
         
