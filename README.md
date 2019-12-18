@@ -43,8 +43,9 @@ A simple shoot game written in Python.
 
 # Commits
 
-We made 70 commits.
+We made 90 commits.
 
+[network graph] (https://github.com/15479/PythonShootGame/network)
 
 # Requirement
 
