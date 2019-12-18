@@ -23,7 +23,7 @@ A simple shoot game written in Python.
 # Screenshot
 
 <p align="center">
-  <img src= width="90%" />
+  <img src= "./resource/readme/main.jpg" width="90%" />
 </p>
 
 # Team member of team 03
