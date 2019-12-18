@@ -19,7 +19,13 @@ class Game():
         self.enemies_down = pygame.sprite.Group()
         self.methors = pygame.sprite.Group()
         self.setEnemy()
-
+        
+        # Wind
+        self.wind = False
+        self.wind_dir = 0
+        self.wind_cnt = 0
+        self.wind_speed = 0
+        
         self.score = 0
         self.EHP = 2                                         # 새로 생긴 적의 HP --> 난이도 조절 parameter
         self.shoot_frequency = 0
@@ -53,6 +59,8 @@ class Game():
         self.bullet_img = self.player_img.subsurface(bullet_rect)
         self.methor_img = pygame.image.load(imgs['methor'])
         self.methor_rect = self.methor_img.get_rect()
+        self.wind_img = pygame.image.load(imgs['wind'])
+        self.wind_rect = self.wind_img.get_rect()
     
 
     # Player 정보 setting 및 객체 생성
@@ -101,13 +109,13 @@ class Game():
         if self.enemy_frequency >= 100:
             self.enemy_frequency = 0
 
-        # Methor 생성 --> while문을 40번 돌 때마다 생성
-        if self.methor_frequency % 100 == 0:
+        # Methor 생성 --> while문을 100000번 돌 때마다 생성
+        if self.methor_frequency % 500 == 0:
             methor_pos = [random.randint(0, self.conf['display']['W'] - self.enemy_rect.width), 0]
             methor = Methor(self.methor_img, methor_pos, 2)
             self.methors.add(methor)
         self.methor_frequency += 1
-        if self.methor_frequency >= 100:
+        if self.methor_frequency >= 500:
             self.methor_frequency = 0
 
         for methor in self.methors:
@@ -163,17 +171,23 @@ class Game():
             self.player.level += 1
             self.player.killed -= 2**self.player.level
             self.player.speed += 1
-            a = random.randrange(1,3)
-            
-            if(a==1):
-                for i in range(50):
-                    self.player.moveLeft()
-                    
-            else:
-                for i in range(50):
-                    self.player.moveRight()
-                
 
+        # 바람 제어
+        self.wind = ((random.randrange(1, 301))%300 ==0)
+        if self.wind_dir!=0:
+            self.wind = True
+        if self.wind==True:
+            if self.wind_dir==0:
+                self.wind_dir = random.choice([-1, 1])
+            self.wind_cnt += 1
+            if self.wind_cnt > 100 :
+                self.wind_cnt = 0
+                self.wind = False
+                self.wind_dir = 0
+            elif self.wind_dir==-1:
+                self.player.moveLeft(2)
+            else:
+                self.player.moveRight(2)            
 
     def draw(self):
         screen = self.screen
@@ -209,14 +223,17 @@ class Game():
 
         key_pressed = pygame.key.get_pressed()
         if not self.player.is_hit:
+            if key_pressed[K_ESCAPE]:
+                pygame.mixer_music.stop()
+                exit()
             if key_pressed[K_LEFT] or key_pressed[K_a]:
-                self.player.moveLeft()
+                self.player.moveLeft(self.player.speed)
             if key_pressed[K_RIGHT] or key_pressed[K_d]:
-                self.player.moveRight()
+                self.player.moveRight(self.player.speed)
             if key_pressed[K_UP] or key_pressed[K_w]:
-                self.player.moveUp()
+                self.player.moveUp(self.player.speed)
             if key_pressed[K_DOWN] or key_pressed[K_s]:
-                self.player.moveDown()
+                self.player.moveDown(self.player.speed)
 
     def draw_gameover(self, screen):
         font = pygame.font.Font(None, 48)

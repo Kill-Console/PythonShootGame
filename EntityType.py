@@ -52,29 +52,29 @@ class Player(pygame.sprite.Sprite):
         bullet = Bullet(bullet_img, self.rect.midtop)
         self.bullets.add(bullet)
 
-    def moveUp(self):
+    def moveUp(self, speed):
         if self.rect.top <= 0:
             self.rect.top = 0
         else:
-            self.rect.top -= self.speed
+            self.rect.top -= speed
 
-    def moveDown(self):
+    def moveDown(self, speed):
         if self.rect.top >= SCREEN_HEIGHT - self.rect.height:
             self.rect.top = SCREEN_HEIGHT - self.rect.height
         else:
-            self.rect.top += self.speed
+            self.rect.top += speed
 
-    def moveLeft(self):
+    def moveLeft(self, speed):
         if self.rect.left <= 0:
             self.rect.left = 0
         else:
-            self.rect.left -= self.speed
+            self.rect.left -= speed
 
-    def moveRight(self):
+    def moveRight(self, speed):
         if self.rect.left >= SCREEN_WIDTH - self.rect.width:
             self.rect.left = SCREEN_WIDTH - self.rect.width
         else:
-            self.rect.left += self.speed
+            self.rect.left += speed
 
     def draw(self, screen, shoot_frequency):
         if not self.is_hit:
