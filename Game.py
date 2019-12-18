@@ -141,7 +141,7 @@ class Game():
         # Methor 생성 --> while문을 100000번 돌 때마다 생성
         if self.methor_frequency % 500 == 0:
             methor_pos = [random.randint(0, self.conf['display']['W'] - self.enemy_rect.width), 0]
-            methor = Methor(self.methor_img, methor_pos, 2)
+            methor = Methor(self.methor_img, methor_pos, random.randint(5,10))
             self.methors.add(methor)
         self.methor_frequency += 1
         if self.methor_frequency >= 500:
@@ -330,6 +330,3 @@ class Game():
         screen.blit(score_alert, score_rect)
         screen.blit(restart, restart_rect)
         screen.blit(quit_game, quit_rect)
-
-
-        screen.blit(text, text_rect)
