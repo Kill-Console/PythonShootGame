@@ -18,7 +18,7 @@ if __name__ == "__main__":
     # Setting loading
     conf = yaml.load(open("./setting.yaml", "r", encoding='UTF-8'), Loader=yaml.FullLoader)
 
-    # Pygame 기본 설정    
+    # Pygame 기본 설정(Pygame basic setting)
     pygame.init()
     window = pygame.display.set_mode((conf['display']['W'], conf['display']['H']))
     pygame.display.set_caption(conf['title'])
@@ -31,8 +31,8 @@ if __name__ == "__main__":
             clock.tick(60)          # 60fps
 
             game.update()           # 게임 state update
-            game.draw()             # UI 렌더링
-            game.handleEvent()      # I/O 처리
+            game.draw()             # UI 렌더링(User Interface renderint)
+            game.handleEvent()      # I/O 처리(Input/Output handle process)
         
         # Game over
         game.draw_gameover(game.screen)
