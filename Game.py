@@ -1,5 +1,6 @@
 import random
 import pygame
+import random
 
 from EntityType import *
 from pygame.locals import *
@@ -137,7 +138,24 @@ class Game():
         if self.player.killed>=2**self.player.level:
             self.player.level += 1
             self.player.killed -= 2**self.player.level
-            self.player.speed += 1 
+            self.player.speed += 1
+            a = random.randrange(1,5)
+            
+            if(a==1):
+                for i in range(50):
+                    self.player.moveLeft()
+                    
+            elif(a==2):
+                for i in range(50):
+                    self.player.moveRight()
+                    
+            elif(a==3):
+                for i in range(50):
+                    self.player.moveUp()
+                    
+            else:
+                for i in range(50):
+                    self.player.moveDown()
 
 
     def draw(self):
