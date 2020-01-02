@@ -77,7 +77,7 @@ running = True
 
 while running:
     # 控制游戏最大帧率为60
-    clock.tick(60)
+    clock.tick(45)
 
     # 控制发射子弹频率,并发射子弹
     if not player.is_hit:
