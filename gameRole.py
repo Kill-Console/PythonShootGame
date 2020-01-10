@@ -39,10 +39,15 @@ class Player(pygame.sprite.Sprite):
         self.bullets = pygame.sprite.Group()            # 玩家飞机所发射的子弹的集合
         self.img_index = 0                              # 玩家精灵图片索引
         self.is_hit = False                             # 玩家是否被击中
+        self.is_gun_ready = True
 
     def shoot(self, bullet_img):
         bullet = Bullet(bullet_img, self.rect.midtop)
         self.bullets.add(bullet)
+        self.is_gun_ready = False
+
+    def reload(self):
+        self.is_gun_ready = True
 
     def moveUp(self):
         if self.rect.top <= 0:

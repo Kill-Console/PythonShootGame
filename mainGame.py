@@ -81,9 +81,8 @@ while running:
 
     # 控制发射子弹频率,并发射子弹
     if not player.is_hit:
-        if shoot_frequency % 15 == 0:
-            bullet_sound.play()
-            player.shoot(bullet_img)
+        if shoot_frequency % 10 == 0:
+            player.reload()
         shoot_frequency += 1
         if shoot_frequency >= 15:
             shoot_frequency = 0
@@ -179,6 +178,10 @@ while running:
             player.moveLeft()
         if key_pressed[K_d] or key_pressed[K_RIGHT]:
             player.moveRight()
+        if key_pressed[K_SPACE] or key_pressed[K_SPACE]:
+            if player.is_gun_ready:
+                bullet_sound.play()
+                player.shoot(bullet_img)
 
 
 font = pygame.font.Font(None, 48)
