@@ -31,3 +31,6 @@ GPL
 
 # Doc
 [使用Pygame制作微信打飞机游戏PC版](https://www.cnblogs.com/dukeleo/p/3339780.html) (a Chinese startup)
+
+
+[![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
