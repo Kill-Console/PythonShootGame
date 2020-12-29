@@ -2,7 +2,7 @@
 
 A simple shoot game written in Python.
 
-# Introduce
+# Introduction
 
 This project only include two simple .py files: 
 
