@@ -14,7 +14,7 @@ TYPE_SMALL = 1
 TYPE_MIDDLE = 2
 TYPE_BIG = 3
 
-# 子弹类
+# 총알
 class Bullet(pygame.sprite.Sprite):
     def __init__(self, bullet_img, init_pos):
         pygame.sprite.Sprite.__init__(self)
@@ -26,19 +26,19 @@ class Bullet(pygame.sprite.Sprite):
     def move(self):
         self.rect.top -= self.speed
 
-# 玩家类
+# 플레이어 클래스
 class Player(pygame.sprite.Sprite):
     def __init__(self, plane_img, player_rect, init_pos):
         pygame.sprite.Sprite.__init__(self)
-        self.image = []                                 # 用来存储玩家对象精灵图片的列表
+        self.image = []                                 # 플레이어 오브젝트 스프라이트 사진 목록을 저장하는 데 사용됩니다.
         for i in range(len(player_rect)):
             self.image.append(plane_img.subsurface(player_rect[i]).convert_alpha())
-        self.rect = player_rect[0]                      # 初始化图片所在的矩形
-        self.rect.topleft = init_pos                    # 初始化矩形的左上角坐标
-        self.speed = 8                                  # 初始化玩家速度，这里是一个确定的值
-        self.bullets = pygame.sprite.Group()            # 玩家飞机所发射的子弹的集合
-        self.img_index = 0                              # 玩家精灵图片索引
-        self.is_hit = False                             # 玩家是否被击中
+        self.rect = player_rect[0]                      # 그림이있는 사각형을 초기화합니다.
+        self.rect.topleft = init_pos                    # 직사각형의 왼쪽 상단 모서리의 좌표를 초기화합니다.
+        self.speed = 8                                  # 플레이어 속도 초기화, 여기에 특정 값이 있습니다.
+        self.bullets = pygame.sprite.Group()            # 플레이어의 비행기가 발사 한 총알 수집
+        self.img_index = 0                              # 플레이어 스프라이트 사진 인덱스
+        self.is_hit = False                             # 플레이어가 맞았는지 여부
 
     def shoot(self, bullet_img):
         bullet = Bullet(bullet_img, self.rect.midtop)
@@ -68,7 +68,7 @@ class Player(pygame.sprite.Sprite):
         else:
             self.rect.left += self.speed
 
-# 敌人类
+# 적 클래스
 class Enemy(pygame.sprite.Sprite):
     def __init__(self, enemy_img, enemy_down_imgs, init_pos):
        pygame.sprite.Sprite.__init__(self)
