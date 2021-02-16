@@ -53,7 +53,7 @@ bullet_img = plane_img.subsurface(bullet_rect)
 # 定义敌机对象使用的surface相关参数
 enemy1_rect = pygame.Rect(534, 612, 57, 43)
 enemy1_img = plane_img.subsurface(enemy1_rect)
-enemy1_down_imgs = []
+enemy1_down_imgs = [ ]
 enemy1_down_imgs.append(plane_img.subsurface(pygame.Rect(267, 347, 57, 43)))
 enemy1_down_imgs.append(plane_img.subsurface(pygame.Rect(873, 697, 57, 43)))
 enemy1_down_imgs.append(plane_img.subsurface(pygame.Rect(267, 296, 57, 43)))
@@ -64,7 +64,9 @@ enemies1 = pygame.sprite.Group()
 # 存储被击毁的飞机，用来渲染击毁精灵动画
 enemies_down = pygame.sprite.Group()
 
+
 shoot_frequency = 0
+
 enemy_frequency = 0
 
 player_down_index = 16
@@ -77,7 +79,7 @@ running = True
 
 while running:
     # 控制游戏最大帧率为60
-    clock.tick(45)
+    clock.tick(50)
 
     # 控制发射子弹频率,并发射子弹
     if not player.is_hit:
