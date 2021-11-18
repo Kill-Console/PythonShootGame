@@ -70,15 +70,43 @@ enemy_frequency = 0
 player_down_index = 16
 
 score = 0
+playtime = 0
+
+timeChecker = time.time()
 
 clock = pygame.time.Clock()
 
 running = True
+isStop = False
 
 while running:
     # max frame = 60fps
     clock.tick(45)
 
+    # add playtime
+    playtime += time.time() - timeChecker
+    timeChecker = time.time()
+    
+    # wait while isStop is true
+    while isStop:
+        clock.tick(45)
+        score_font = pygame.font.Font(None, 36)
+        score_text = score_font.render("Pause", True, (128, 128, 128))
+        text_rect = score_text.get_rect()
+        text_rect.centerx = round(SCREEN_WIDTH / 2)
+        text_rect.centery = round(SCREEN_HEIGHT / 2)
+        screen.blit(score_text, text_rect)
+        pygame.display.update()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
+            # resume game when Space key pressed
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    isStop = False
+        timeChecker = time.time()
+    
     # bullet shoot control
     if not player.is_hit:
         if shoot_frequency % 15 == 0:
@@ -167,6 +195,10 @@ while running:
         if event.type == pygame.QUIT:
             pygame.quit()
             exit()
+        # pause game when Space key pressed
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_SPACE:
+                isStop = True
             
     # keyboard input event
     key_pressed = pygame.key.get_pressed()
