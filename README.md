@@ -19,6 +19,10 @@ This project only include two simple .py files:
 ```bash
 $ python mainGame.py
 ```
+# How To Play Game
+
+W / A / S / D or Arrow keys : move
+Space : pause
 
 # License
 GPL
