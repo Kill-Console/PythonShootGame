@@ -21,7 +21,7 @@ $ python mainGame.py
 ```
 # How To Play Game
 
-W / A / S / D or Arrow keys : move
+W / A / S / D or Arrow keys : move  
 Space : pause
 
 # License
