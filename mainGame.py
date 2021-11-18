@@ -204,6 +204,12 @@ while running:
     key_pressed = pygame.key.get_pressed()
     # If the player is hit, it has no effect
     if not player.is_hit:
+        # slow mode
+        if key_pressed[K_LSHIFT] or key_pressed[K_RSHIFT]:
+            player.speed = 4
+        else:
+            player.speed = 8
+        # move
         if key_pressed[K_w] or key_pressed[K_UP]:
             player.moveUp()
         if key_pressed[K_s] or key_pressed[K_DOWN]:
@@ -212,6 +218,7 @@ while running:
             player.moveLeft()
         if key_pressed[K_d] or key_pressed[K_RIGHT]:
             player.moveRight()
+    print(player.speed)
 
 
 font = pygame.font.Font(None, 48)
