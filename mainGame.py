@@ -4,7 +4,7 @@ Created on Wed Sep 11 11:05:00 2013
 
 @author: Leo
 """
-
+import time
 import pygame
 from sys import exit
 from pygame.locals import *
@@ -12,12 +12,12 @@ from gameRole import *
 import random
 
 
-# 初始化游戏
+# initialize
 pygame.init()
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption('飞机大战')
 
-# 载入游戏音乐
+# load sound
 bullet_sound = pygame.mixer.Sound('resources/sound/bullet.wav')
 enemy1_down_sound = pygame.mixer.Sound('resources/sound/enemy1_down.wav')
 game_over_sound = pygame.mixer.Sound('resources/sound/game_over.wav')
@@ -28,14 +28,14 @@ pygame.mixer.music.load('resources/sound/game_music.wav')
 pygame.mixer.music.play(-1, 0.0)
 pygame.mixer.music.set_volume(0.25)
 
-# 载入背景图
+# load background image
 background = pygame.image.load('resources/image/background.png').convert()
 game_over = pygame.image.load('resources/image/gameover.png')
 
 filename = 'resources/image/shoot.png'
 plane_img = pygame.image.load(filename)
 
-# 设置玩家相关参数
+# player initialize
 player_rect = []
 player_rect.append(pygame.Rect(0, 99, 102, 126))        # 玩家精灵图片区域
 player_rect.append(pygame.Rect(165, 360, 102, 126))
@@ -46,11 +46,11 @@ player_rect.append(pygame.Rect(432, 624, 102, 126))
 player_pos = [200, 600]
 player = Player(plane_img, player_rect, player_pos)
 
-# 定义子弹对象使用的surface相关参数
+# Define the surface related parameters used by the bullet object
 bullet_rect = pygame.Rect(1004, 987, 9, 21)
 bullet_img = plane_img.subsurface(bullet_rect)
 
-# 定义敌机对象使用的surface相关参数
+# Define the surface related parameters used by the enemy object
 enemy1_rect = pygame.Rect(534, 612, 57, 43)
 enemy1_img = plane_img.subsurface(enemy1_rect)
 enemy1_down_imgs = []
@@ -61,7 +61,7 @@ enemy1_down_imgs.append(plane_img.subsurface(pygame.Rect(930, 697, 57, 43)))
 
 enemies1 = pygame.sprite.Group()
 
-# 存储被击毁的飞机，用来渲染击毁精灵动画
+# destoryed enemy list to render destruction animation
 enemies_down = pygame.sprite.Group()
 
 shoot_frequency = 0
@@ -76,10 +76,10 @@ clock = pygame.time.Clock()
 running = True
 
 while running:
-    # 控制游戏最大帧率为60
+    # max frame = 60fps
     clock.tick(45)
 
-    # 控制发射子弹频率,并发射子弹
+    # bullet shoot control
     if not player.is_hit:
         if shoot_frequency % 15 == 0:
             bullet_sound.play()
@@ -88,7 +88,7 @@ while running:
         if shoot_frequency >= 15:
             shoot_frequency = 0
 
-    # 生成敌机
+    # spawn enemy
     if enemy_frequency % 50 == 0:
         enemy1_pos = [random.randint(0, SCREEN_WIDTH - enemy1_rect.width), 0]
         enemy1 = Enemy(enemy1_img, enemy1_down_imgs, enemy1_pos)
@@ -97,16 +97,16 @@ while running:
     if enemy_frequency >= 100:
         enemy_frequency = 0
 
-    # 移动子弹，若超出窗口范围则删除
+    # bullet move, boundary check
     for bullet in player.bullets:
         bullet.move()
         if bullet.rect.bottom < 0:
             player.bullets.remove(bullet)
 
-    # 移动敌机，若超出窗口范围则删除
+    # enemy move, boundary check
     for enemy in enemies1:
         enemy.move()
-        # 判断玩家是否被击中
+        # player collide check
         if pygame.sprite.collide_circle(enemy, player):
             enemies_down.add(enemy)
             enemies1.remove(enemy)
@@ -116,28 +116,29 @@ while running:
         if enemy.rect.top > SCREEN_HEIGHT:
             enemies1.remove(enemy)
 
-    # 将被击中的敌机对象添加到击毁敌机Group中，用来渲染击毁动画
+    # render destruction animation
     enemies1_down = pygame.sprite.groupcollide(enemies1, player.bullets, 1, 1)
     for enemy_down in enemies1_down:
         enemies_down.add(enemy_down)
 
-    # 绘制背景
+    # draw background
     screen.fill(0)
     screen.blit(background, (0, 0))
 
-    # 绘制玩家飞机
+    # draw player
     if not player.is_hit:
         screen.blit(player.image[player.img_index], player.rect)
-        # 更换图片索引使飞机有动画效果
+        # player animation : normal
         player.img_index = shoot_frequency // 8
     else:
+        # player animation : destruction
         player.img_index = player_down_index // 8
         screen.blit(player.image[player.img_index], player.rect)
         player_down_index += 1
         if player_down_index > 47:
             running = False
 
-    # 绘制击毁动画
+    # enemy animation : crash
     for enemy_down in enemies_down:
         if enemy_down.down_index == 0:
             enemy1_down_sound.play()
@@ -148,18 +149,18 @@ while running:
         screen.blit(enemy_down.down_imgs[enemy_down.down_index // 2], enemy_down.rect)
         enemy_down.down_index += 1
 
-    # 绘制子弹和敌机
+    # draw bullet, enemy
     player.bullets.draw(screen)
     enemies1.draw(screen)
 
-    # 绘制得分
+    # draw score
     score_font = pygame.font.Font(None, 36)
     score_text = score_font.render(str(score), True, (128, 128, 128))
     text_rect = score_text.get_rect()
     text_rect.topleft = [10, 10]
     screen.blit(score_text, text_rect)
 
-    # 更新屏幕
+    # update screen
     pygame.display.update()
 
     for event in pygame.event.get():
@@ -167,9 +168,9 @@ while running:
             pygame.quit()
             exit()
             
-    # 监听键盘事件
+    # keyboard input event
     key_pressed = pygame.key.get_pressed()
-    # 若玩家被击中，则无效
+    # If the player is hit, it has no effect
     if not player.is_hit:
         if key_pressed[K_w] or key_pressed[K_UP]:
             player.moveUp()
