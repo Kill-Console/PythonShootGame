@@ -155,10 +155,10 @@ while running:
         if pygame.sprite.collide_circle(enemy, player):
             enemies_down.add(enemy)
             enemies1.remove(enemy)
-			life--
+			life -= 1
 			if not life:
-				player.is_die = True
-				break
+                player.is_die = True
+                break
         if enemy.rect.top > SCREEN_HEIGHT:
             enemies1.remove(enemy)
 
@@ -172,13 +172,13 @@ while running:
     screen.blit(background, (0, 0))
 
     # draw player
-    if not player.is_die:
+    if life:
         screen.blit(player.image[player.img_index], player.rect)
         # player animation : normal
         player.img_index = shoot_frequency // 8
     else:
         # player animation : destruction
-		game_over_sound.play()
+        game_over_sound.play()
         player.img_index = player_down_index // 8
         screen.blit(player.image[player.img_index], player.rect)
         player_down_index += 1
