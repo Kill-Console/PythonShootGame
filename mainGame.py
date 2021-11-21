@@ -155,8 +155,8 @@ while running:
         if pygame.sprite.collide_circle(enemy, player):
             enemies_down.add(enemy)
             enemies1.remove(enemy)
-			life -= 1
-			if not life:
+            life -= 1
+            if life <= 0:
                 player.is_die = True
                 break
         if enemy.rect.top > SCREEN_HEIGHT:

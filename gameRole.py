@@ -38,7 +38,7 @@ class Player(pygame.sprite.Sprite):
         self.speed = 8                                  # initialize player speed
         self.bullets = pygame.sprite.Group()            # initialize player bullet group
         self.img_index = 0                              # initialize player sprite index
-        self.is_hit = False                             # initialize player ishit
+        self.is_die = False                             # initialize player ishit
 
     def shoot(self, bullet_img):
         bullet = Bullet(bullet_img, self.rect.midtop)
