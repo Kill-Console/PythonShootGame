@@ -88,7 +88,7 @@ player_down_index = 16
 
 score = 0
 playtime = 0
-
+life = 3
 timeChecker = time.time()
 
 clock = pygame.time.Clock()
@@ -125,7 +125,7 @@ while running:
         timeChecker = time.time()
     
     # bullet shoot control
-    if not player.is_hit:
+    if not player.is_die:
         if shoot_frequency % 15 == 0:
             bullet_sound.play()
             player.shoot(bullet_img)
@@ -155,9 +155,10 @@ while running:
         if pygame.sprite.collide_circle(enemy, player):
             enemies_down.add(enemy)
             enemies1.remove(enemy)
-            player.is_hit = True
-            game_over_sound.play()
-            break
+			life--
+			if not life:
+				player.is_die = True
+				break
         if enemy.rect.top > SCREEN_HEIGHT:
             enemies1.remove(enemy)
 
@@ -171,12 +172,13 @@ while running:
     screen.blit(background, (0, 0))
 
     # draw player
-    if not player.is_hit:
+    if not player.is_die:
         screen.blit(player.image[player.img_index], player.rect)
         # player animation : normal
         player.img_index = shoot_frequency // 8
     else:
         # player animation : destruction
+		game_over_sound.play()
         player.img_index = player_down_index // 8
         screen.blit(player.image[player.img_index], player.rect)
         player_down_index += 1
@@ -220,7 +222,7 @@ while running:
     # keyboard input event
     key_pressed = pygame.key.get_pressed()
     # If the player is hit, it has no effect
-    if not player.is_hit:
+    if not player.is_die:
         # slow mode
         if key_pressed[K_LSHIFT] or key_pressed[K_RSHIFT]:
             player.speed = 4
