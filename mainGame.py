@@ -8,9 +8,10 @@ Created on Wed Sep 11 11:05:00 2013
 import pygame
 from sys import exit
 from pygame.locals import *
-from gameRole import *
-import random
 
+import random
+SCREEN_WIDTH = 500
+SCREEN_HEIGHT = 500
 
 # 初始化游戏
 pygame.init()
